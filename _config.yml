@@ -14,7 +14,7 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://houstoneb.github.io/blog/
-root: /
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -79,8 +79,8 @@ theme: jekyll-theme-merlot
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/HoustonEB/blog.git #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
-  branch: gh-pages #published
-  message: blog
+  repo: https://github.com/HoustonEB/blog.git
+  branch: gh-pages
+  message: blog1
 # deploy:
 #   type:
