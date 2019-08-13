@@ -344,26 +344,33 @@
       
         
           
-            <ol>
-<li><p>开启服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成新文章</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 'your article name'</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成打包文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>清除打包文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>部署blog<br>需要配置_config.yml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="noopener">hexo配置</a></p>
+          
+开启服务
+1hexo server
+
+生成新文章
+1hexo new 'your article name'
+
+生成打包文件
+1hexo generate
+
+清除打包文件
+1hexo clean
+
+部署blog需要配置_config.yml
+1hexo deploy
+
+
+hexo配置
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/08/13/hexo常用命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -503,33 +510,29 @@
       
         
           
-            <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
-<ol>
-<li>windows:</li>
-</ol>
-<ul>
-<li>无脑下一步.</li>
-</ul>
-<ol start="2">
-<li>mac:</li>
-</ol>
-<ul>
-<li><a href="https://www.telerik.com/download/fiddler/fiddler-osx-beta" target="_blank" rel="noopener">下载fiddler</a></li>
-<li>下载fiddler运行的环境<a href="http://www.mono-project.com/download/#download-mac" target="_blank" rel="noopener">mono下载</a></li>
-<li>下载证书用于fiddler访问https协议的请求<br><code>/Library/Frameworks/Mono.framework/Versions/&lt;Mono Version&gt;/bin/mozroots --import --sync</code><br><strong>mac环境下Library路径在user的上级, 不是个人users下的Library</strong></li>
-<li>将mono加入全局环境变量中<code>sudo vi ~/.bash_profile</code>, 并写入<br><code>export MONO_HOME=/Library/Frameworks/Mono.framework/Versions/5.4.1</code><br><code>export PATH=$PATH:$MONO_HOME/bin</code></li>
-<li>cd到对应的fiddler解压后的文件夹里,运行32位的fiddler<code>mono --arch=32 Fiddler.exe</code><br><strong><mono version>mono版本取前三位</mono></strong></li>
-</ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><hr>
-<img src="/blog/2019/05/06/Fiddler/fiddler1.jpg" title="image">
-<img src="/blog/2019/05/06/Fiddler/fiddler2.jpg" title="image">
-<p>fiddler要代理手机上的请求需满足</p>
-<ul>
-<li>代理地址需要填pc的ip地址<code>ifconfig</code>端口号是8888.</li>
-<li>手机和pc要再同一个网下.<img src="/blog/2019/05/06/Fiddler/fiddler3.jpg" title="image"></li>
-</ul>
+          安装
 
-          
+windows:
+
+
+无脑下一步.
+
+
+mac:
+
+
+下载fiddler
+下载fiddler运行的环境mono下载
+下载证书用于fiddler访问https协议的请求/Library/Frameworks/Mono.framework/Versions/&lt;Mono Version&gt;/bin/mozroots --import --syncmac环境下Library路径在user的上级, 不是个人users下的Library
+将mono加入全局环境变量中sudo vi ~/.bash_profile, 并写入export MONO_HOME=/Library/Framewor
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/05/06/Fiddler/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -647,17 +650,19 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post1$ hexo new "My New Post"
+More info: Writing
+Run server1$ hexo server
+More in
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/05/06/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -775,9 +780,16 @@
       
         
           
-            <h4 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h4><hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> 进入目录</span><br><span class="line"></span><br><span class="line"><span class="built_in">pwd</span> 列出当前的路径</span><br><span class="line"></span><br><span class="line">ls 列出目录的结构</span><br><span class="line">  -a 列出隐藏的文件</span><br><span class="line"></span><br><span class="line">mkdir 创建文件夹</span><br><span class="line"></span><br><span class="line">cat 查看文件的内容</span><br><span class="line"></span><br><span class="line">touch 文件名.格式 创建指定的文件</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'文件内容'</span> &gt;&gt; 文件名.文件格式 创建文件内容和文件</span><br><span class="line"></span><br><span class="line">cp 复制目录时不会复制子目录和子文件</span><br><span class="line">  -r 递归复制,会复制子目录和子文件</span><br><span class="line"></span><br><span class="line">mv 移动文件夹和目录, 还可以重命名文件和目录</span><br><span class="line">eg: mv test.md test.txt 重命名</span><br><span class="line">    mv test.md .. 移动到上一层目录</span><br><span class="line">    mv test.md ../test2/ 移动到上一层的test2的目录下</span><br><span class="line">    mv test.md ../test2 移动到上一层并重新命名为test2</span><br><span class="line">    mv test1 test2 将目录test1重命名为test2</span><br><span class="line"></span><br><span class="line">rm 删除文件和文件夹</span><br><span class="line">  -rf 递归删除所有子目录和子文件</span><br><span class="line"></span><br><span class="line">rmdir 只能删除空目录</span><br><span class="line"></span><br><span class="line">vi 编辑文件</span><br><span class="line">  i 编辑内容</span><br><span class="line">  esc 退出操作</span><br><span class="line">  <span class="built_in">shift</span>+z+z 保存退出vi模式</span><br></pre></td></tr></table></figure>
-          
+          Linux常用命令
+12345678910111213141516171819202122232425262728293031323334cd 进入目录pwd 列出当前的路径ls 列出目录的结构  -a 列出隐藏的文件mkdir 创建文件夹cat 查看文件的内容touch 文件名.格式 创建指定的文件echo '文件内容' &gt;&gt; 文件名.文件格式 创建文件内容和文件cp 复制目录时不会复制子目录和子文件  -r 递归复制,会复制子目录和子文件mv 移动文件夹和目录, 还可以重命名文件和目录eg: mv test.md test.txt 重命名    mv test.md .. 移动
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/05/04/Linux/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -895,8 +907,15 @@
       
         
           
-            <h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2>
+          node
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/05/04/Node初级使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
