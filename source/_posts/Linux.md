@@ -1,7 +1,7 @@
 ---
 title: Linux
 date: 2019-05-04 18:35:32
-tags:
+tags: Linux命令
 ---
 #### Linux常用命令
 ---

@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
+title: ONCE
+subtitle: 😄
+description: Hellow World
 keywords:
-author: John Doe
-language:
+author: ONCE
+language: zh-Hans
 timezone:
 
 # URL
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: diaspora
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,6 +81,6 @@ deploy:
   type: git 
   repo: https://github.com/HoustonEB/blog.git 
   branch: gh-pages 
-  message: blog1 
+  message: blog-deploy
 # deploy:
 #   type:
