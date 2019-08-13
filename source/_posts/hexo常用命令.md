@@ -24,3 +24,4 @@ hexo clean
 ```shell
 hexo deploy
 ```
+[hexo配置](http://theme-next.iissnan.com/getting-started.html#theme-settings)
