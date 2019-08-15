@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="开启服务 1hexo server  生成新文章 1hexo new &apos;your article name&apos;  生成打包文件 1hexo generate  清除打包文件 1hexo clean  部署blog需要配置_config.yml 1hexo deploy   hexo配置">
+<meta name="description" content="命令 开启服务 1hexo server  生成新文章 1hexo new &apos;your article name&apos;">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo常用命令">
-<meta property="og:url" content="https://houstoneb.github.io/blog/2019/08/13/hexo常用命令/index.html">
+<meta property="og:title" content="hexo">
+<meta property="og:url" content="https://houstoneb.github.io/blog/2019/08/13/hexo/index.html">
 <meta property="og:site_name" content="ONCE">
-<meta property="og:description" content="开启服务 1hexo server  生成新文章 1hexo new &apos;your article name&apos;  生成打包文件 1hexo generate  清除打包文件 1hexo clean  部署blog需要配置_config.yml 1hexo deploy   hexo配置">
+<meta property="og:description" content="命令 开启服务 1hexo server  生成新文章 1hexo new &apos;your article name&apos;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-13T07:52:46.000Z">
+<meta property="og:updated_time" content="2019-08-15T09:54:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo常用命令">
-<meta name="twitter:description" content="开启服务 1hexo server  生成新文章 1hexo new &apos;your article name&apos;  生成打包文件 1hexo generate  清除打包文件 1hexo clean  部署blog需要配置_config.yml 1hexo deploy   hexo配置">
+<meta name="twitter:title" content="hexo">
+<meta name="twitter:description" content="命令 开启服务 1hexo server  生成新文章 1hexo new &apos;your article name&apos;">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://houstoneb.github.io/blog/2019/08/13/hexo常用命令/">
+  <link rel="canonical" href="https://houstoneb.github.io/blog/2019/08/13/hexo/">
 
 
 
 
 
-  <title>hexo常用命令 | ONCE</title>
+  <title>hexo | ONCE</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/08/13/hexo常用命令/">
+    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/08/13/hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ONCE">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo常用命令</h1>
+          <h1 class="post-title" itemprop="name headline">hexo</h1>
         
 
         <div class="post-meta">
@@ -340,13 +340,16 @@
       
 
       
-        <ol>
+        <h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><ol>
 <li><p>开启服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>生成新文章</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 'your article name'</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<a id="more"></a>
+<ol start="3">
 <li><p>生成打包文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
 </li>
@@ -356,8 +359,24 @@
 <li><p>部署blog<br>需要配置_config.yml</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>生成新html</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page 'your html name'</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<p><a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="noopener">hexo配置</a></p>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ol>
+<li><p>链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% link [text] [url] [external] [title] %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img  fullimage fiddler1.jpg image %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>hexo参考docs</strong></p>
+<ul>
+<li><a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">hexo</a></li>
+<li><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next主题</a></li>
+<li><a href="https://anoyer.cn/article/Hexo%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.html" target="_blank" rel="noopener">第三方插件</a></li>
+</ul>
 
       
     </div>
@@ -388,7 +407,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/05/06/Fiddler/" rel="next" title="Fiddler">
+              <a href="/blog/2019/05/06/fiddler/" rel="next" title="Fiddler">
                 <i class="fa fa-chevron-left"></i> Fiddler
               </a>
             
@@ -397,6 +416,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/08/15/charles/" rel="prev" title="charles">
+                charles <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -448,8 +471,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/blog/uploads/avatar.jpg" alt="ONCE">
           <p class="site-author-name" itemprop="name">ONCE</p>
@@ -462,7 +494,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/blog/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -484,7 +516,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/blog/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -533,6 +565,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">2.</span> <span class="nav-text">标签</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -591,8 +639,6 @@
   
 
 
-  
-
 
 
 
@@ -620,9 +666,6 @@
 
   
   <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   

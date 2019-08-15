@@ -78,7 +78,7 @@
 <link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="抓包,">
+  <meta name="keywords" content="charles,">
 
 
 
@@ -94,22 +94,24 @@
 
 
 
-<meta name="description" content="安装  windows:   无脑下一步.   mac:   下载fiddler 下载fiddler运行的环境mono下载 下载证书用于fiddler访问https协议的请求">
-<meta name="keywords" content="抓包">
+<meta name="description" content="charles常用技巧  断点mock数据右键你需要打断点的请求.">
+<meta name="keywords" content="charles">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fiddler">
-<meta property="og:url" content="https://houstoneb.github.io/blog/2019/05/06/fiddler/index.html">
+<meta property="og:title" content="charles">
+<meta property="og:url" content="https://houstoneb.github.io/blog/2019/08/15/charles/index.html">
 <meta property="og:site_name" content="ONCE">
-<meta property="og:description" content="安装  windows:   无脑下一步.   mac:   下载fiddler 下载fiddler运行的环境mono下载 下载证书用于fiddler访问https协议的请求">
+<meta property="og:description" content="charles常用技巧  断点mock数据右键你需要打断点的请求.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://houstoneb.github.io/blog/2019/05/06/fiddler/fiddler1.jpg">
-<meta property="og:image" content="https://houstoneb.github.io/blog/2019/05/06/fiddler/fiddler2.jpg">
-<meta property="og:image" content="https://houstoneb.github.io/blog/2019/05/06/fiddler/fiddler3.jpg">
-<meta property="og:updated_time" content="2019-08-15T12:05:16.000Z">
+<meta property="og:image" content="https://houstoneb.github.io/blog/2019/08/15/charles/charles4.jpg">
+<meta property="og:image" content="https://houstoneb.github.io/blog/2019/08/15/charles/charles5.jpg">
+<meta property="og:image" content="https://houstoneb.github.io/blog/2019/08/15/charles/charles1.jpg">
+<meta property="og:image" content="https://houstoneb.github.io/blog/2019/08/15/charles/charles2.jpg">
+<meta property="og:image" content="https://houstoneb.github.io/blog/2019/08/15/charles/charles3.jpg">
+<meta property="og:updated_time" content="2019-08-15T12:52:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fiddler">
-<meta name="twitter:description" content="安装  windows:   无脑下一步.   mac:   下载fiddler 下载fiddler运行的环境mono下载 下载证书用于fiddler访问https协议的请求">
-<meta name="twitter:image" content="https://houstoneb.github.io/blog/2019/05/06/fiddler/fiddler1.jpg">
+<meta name="twitter:title" content="charles">
+<meta name="twitter:description" content="charles常用技巧  断点mock数据右键你需要打断点的请求.">
+<meta name="twitter:image" content="https://houstoneb.github.io/blog/2019/08/15/charles/charles4.jpg">
 
 
 
@@ -138,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://houstoneb.github.io/blog/2019/05/06/fiddler/">
+  <link rel="canonical" href="https://houstoneb.github.io/blog/2019/08/15/charles/">
 
 
 
 
 
-  <title>Fiddler | ONCE</title>
+  <title>charles | ONCE</title>
   
 
 
@@ -277,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/05/06/fiddler/">
+    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/08/15/charles/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ONCE">
@@ -294,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Fiddler</h1>
+          <h1 class="post-title" itemprop="name headline">charles</h1>
         
 
         <div class="post-meta">
@@ -306,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T17:11:23+08:00">
-                2019-05-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T15:14:48+08:00">
+                2019-08-15
               </time>
             
 
@@ -366,32 +368,25 @@
       
 
       
-        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
+        <div class="note info"><p>charles常用技巧</p></div>
 <ol>
-<li>windows:</li>
+<li>断点mock数据<br>右键你需要打断点的请求.<a id="more"></a>
+<img src="/blog/2019/08/15/charles/charles4.jpg">
+刷新页面后可以编辑发出的请求和修改响应的数据.</li>
 </ol>
-<ul>
-<li>无脑下一步.</li>
-</ul>
-<ol start="2">
-<li>mac:</li>
-</ol>
-<ul>
-<li><a href="https://www.telerik.com/download/fiddler/fiddler-osx-beta" target="_blank" rel="noopener">下载fiddler</a></li>
-<li>下载fiddler运行的环境<a href="http://www.mono-project.com/download/#download-mac" target="_blank" rel="noopener">mono下载</a></li>
-<li>下载证书用于fiddler访问https协议的请求<a id="more"></a>
-<code>/Library/Frameworks/Mono.framework/Versions/&lt;Mono Version&gt;/bin/mozroots --import --sync</code><br><strong>mac环境下Library路径在user的上级, 不是个人users下的Library</strong></li>
-<li>将mono加入全局环境变量中<code>sudo vi ~/.bash_profile</code>, 并写入<br><code>export MONO_HOME=/Library/Frameworks/Mono.framework/Versions/5.4.1</code><br><code>export PATH=$PATH:$MONO_HOME/bin</code></li>
-<li>cd到对应的fiddler解压后的文件夹里,运行32位的fiddler<code>mono --arch=32 Fiddler.exe</code><br><strong><mono version>mono版本取前三位</mono></strong><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3></li>
-</ul>
+<img src="/blog/2019/08/15/charles/charles5.jpg">
 <hr>
-<img src="/blog/2019/05/06/fiddler/fiddler1.jpg" class="full-image" title="image">
-<img src="/blog/2019/05/06/fiddler/fiddler2.jpg" title="image">
-<p>fiddler要代理手机上的请求需满足</p>
-<ul>
-<li>代理地址需要填pc的ip地址<code>ifconfig</code>端口号是8888.</li>
-<li>手机和pc要再同一个网下.<img src="/blog/2019/05/06/fiddler/fiddler3.jpg" title="image"></li>
-</ul>
+<div class="note warning"><p>使用charles经常会遇到的问题总结:</p></div>
+<ol>
+<li>抓不到https请求<br>安装证书.</li>
+</ol>
+<img src="/blog/2019/08/15/charles/charles1.jpg">
+<p>开启SSL代理,监听所有host和port.</p>
+<img src="/blog/2019/08/15/charles/charles2.jpg">
+<ol start="2">
+<li>请求没有被charles代理成功.<br>将本地的http和https代理到本机ip地址,port是charles的默认端口号8888</li>
+</ol>
+<img src="/blog/2019/08/15/charles/charles3.jpg">
 
       
     </div>
@@ -409,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/抓包/" rel="tag"># 抓包</a>
+            <a href="/blog/tags/charles/" rel="tag"># charles</a>
           
         </div>
       
@@ -422,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/05/06/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/blog/2019/08/13/hexo/" rel="next" title="hexo">
+                <i class="fa fa-chevron-left"></i> hexo
               </a>
             
           </div>
@@ -431,10 +426,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2019/08/13/hexo/" rel="prev" title="hexo">
-                hexo <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,17 +477,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/blog/uploads/avatar.jpg" alt="ONCE">
           <p class="site-author-name" itemprop="name">ONCE</p>
@@ -580,22 +562,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
