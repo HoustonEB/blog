@@ -9,12 +9,10 @@ tags:
 ---
 1. windows:
 - 无脑下一步.
-
 2. mac:
 - [下载fiddler](https://www.telerik.com/download/fiddler/fiddler-osx-beta)
 - 下载fiddler运行的环境[mono下载](http://www.mono-project.com/download/#download-mac)
 - 下载证书用于fiddler访问https协议的请求
-<!-- more -->
 `/Library/Frameworks/Mono.framework/Versions/<Mono Version>/bin/mozroots --import --sync` 
 **mac环境下Library路径在user的上级, 不是个人users下的Library**
 - 将mono加入全局环境变量中`sudo vi ~/.bash_profile`, 并写入
@@ -22,6 +20,7 @@ tags:
 `export PATH=$PATH:$MONO_HOME/bin`
 - cd到对应的fiddler解压后的文件夹里,运行32位的fiddler`mono --arch=32 Fiddler.exe`
 **<Mono Version>mono版本取前三位**
+<!-- more -->
 ### 使用
 ---
 {% asset_img  full-image fiddler1.jpg image %}

@@ -9,8 +9,9 @@ charles常用技巧
 {% endnote %}
 1. 断点mock数据
 右键你需要打断点的请求.
-<!-- more -->
+
 {% asset_img charles4.jpg %}
+<!-- more -->
 刷新页面后可以编辑发出的请求和修改响应的数据.
 
 {% asset_img charles5.jpg %}
