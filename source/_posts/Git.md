@@ -15,3 +15,14 @@ tags: Git
 {% endnote %}
 2. 拉取remote分支,并在本地创建分支
 `git checkout local-branch origin/remote-branch`
+3. tag
+**查看本地全部tag**
+`git tag`
+**给某个commit添加tag**
+`git tag tagName commitHash`
+**推动本地tag到远端**
+`git push --tags origin`
+**删除tag**
+`git tag -d tagName`
+**查看tag是在哪个commit打的**
+`git show tagName`
