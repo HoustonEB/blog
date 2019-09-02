@@ -26,3 +26,7 @@ tags: Git
 `git tag -d tagName`
 **查看tag是在哪个commit打的**
 `git show tagName`
+4. config
+设置全局的git用户名和邮箱,不带global是设置该仓库的git用户名和邮箱
+`git config --global user.name newName`
+`git config --global user.email newEmail`

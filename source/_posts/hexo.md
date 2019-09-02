@@ -39,6 +39,13 @@ hexo new page 'your html name'
 ```shell
 {% asset_img  fullimage fiddler1.jpg image %}
 ```
+3. note
+```shell
+{% note info %}
+test
+{% endnote %}
+```
+default、primary、success、info、warning、danger
 **hexo参考docs**
  - {% link hexo https://hexo.io/zh-cn/docs/tag-plugins.html %}
  - {% link next主题 http://theme-next.iissnan.com/theme-settings.html %}
