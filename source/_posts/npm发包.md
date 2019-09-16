@@ -54,5 +54,5 @@ npm version prepatch的作用: 1.修改预备修订版的版本号 2.生成tag
   "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
  {% endnote %}
  
- (添加包的标签)[https://shields.io/category/downloads]
+ [添加包的标签](https://shields.io/category/downloads)
 
