@@ -14,7 +14,7 @@ tags: Git
     - 将项目里的第三方git仓库化为己有
 {% endnote %}
 2. 拉取remote分支,并在本地创建分支
-`git checkout local-branch origin/remote-branch`
+`git checkout -b local-branch origin/remote-branch`
 3. tag
 **查看本地全部tag**
 `git tag`
