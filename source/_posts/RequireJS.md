@@ -15,6 +15,7 @@ RequireJS加载所有代码根据一个基础的路径(baseUrl).一个页面的�
     (with async attribute) for scripts/main.js-->
 <script data-main="scripts/main" src="scripts/require.js"></script>
 ```
+<!-- more -->
 注意: script标签载入脚本文件时,是异步的.所以当引入两个脚本文件时,会出现后一个脚本执行结束时间要短于第一个文件.
 ```html
 <script data-main="scripts/main" src="scripts/require.js"></script>
