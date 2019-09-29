@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="常用git命令 清除git缓存,添加新的文件进入暂存区git rm -r --cached .git add .应用场景: - 先暂存文件,没有git ignore文件 - 将项目里的第三方git仓库化为己有  拉取remote分支,并在本地创建分支git checkout local-branch origin/remote-branch tag查看本地全部taggit tag给某个commit">
+<meta name="description" content="常用git命令 清除git缓存,添加新的文件进入暂存区git rm -r --cached .git add .应用场景: - 先暂存文件,没有git ignore文件 - 将项目里的第三方git仓库化为己有  拉取remote分支,并在本地创建分支git checkout -b local-branch origin/remote-branch tag查看本地全部taggit tag给某个com">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git">
 <meta property="og:url" content="https://houstoneb.github.io/blog/2019/08/22/Git/index.html">
 <meta property="og:site_name" content="ONCE">
-<meta property="og:description" content="常用git命令 清除git缓存,添加新的文件进入暂存区git rm -r --cached .git add .应用场景: - 先暂存文件,没有git ignore文件 - 将项目里的第三方git仓库化为己有  拉取remote分支,并在本地创建分支git checkout local-branch origin/remote-branch tag查看本地全部taggit tag给某个commit">
+<meta property="og:description" content="常用git命令 清除git缓存,添加新的文件进入暂存区git rm -r --cached .git add .应用场景: - 先暂存文件,没有git ignore文件 - 将项目里的第三方git仓库化为己有  拉取remote分支,并在本地创建分支git checkout -b local-branch origin/remote-branch tag查看本地全部taggit tag给某个com">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-27T02:52:37.000Z">
+<meta property="og:updated_time" content="2019-09-17T11:50:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git">
-<meta name="twitter:description" content="常用git命令 清除git缓存,添加新的文件进入暂存区git rm -r --cached .git add .应用场景: - 先暂存文件,没有git ignore文件 - 将项目里的第三方git仓库化为己有  拉取remote分支,并在本地创建分支git checkout local-branch origin/remote-branch tag查看本地全部taggit tag给某个commit">
+<meta name="twitter:description" content="常用git命令 清除git缓存,添加新的文件进入暂存区git rm -r --cached .git add .应用场景: - 先暂存文件,没有git ignore文件 - 将项目里的第三方git仓库化为己有  拉取remote分支,并在本地创建分支git checkout -b local-branch origin/remote-branch tag查看本地全部taggit tag给某个com">
 
 
 
@@ -367,8 +367,8 @@
 <pre><code>- 先暂存文件,没有git ignore文件
 - 将项目里的第三方git仓库化为己有
 </code></pre></div></li>
-<li>拉取remote分支,并在本地创建分支<br><code>git checkout local-branch origin/remote-branch</code></li>
-<li>tag<br><strong>查看本地全部tag</strong><br><code>git tag</code><br><strong>给某个commit添加tag</strong><br><code>git tag tagName commitHash</code><br><strong>推动本地tag到远端</strong><br><code>git push --tags origin</code><br><strong>删除tag</strong><br><code>git tag -d tagName</code><br><strong>查看tag是在哪个commit打的</strong><br><code>git show tagName</code></li>
+<li>拉取remote分支,并在本地创建分支<br><code>git checkout -b local-branch origin/remote-branch</code></li>
+<li>tag<br><strong>查看本地全部tag</strong><br><code>git tag</code><br><strong>给某个commit添加tag</strong><br><code>git tag tagName commitHash</code><br><strong>推动本地tag到远端</strong><br><code>git push --tags origin</code><br><strong>删除tag</strong><br><code>git tag -d tagName</code><br><strong>查看tag是在哪个commit打的</strong><br><code>git show tagName</code><a id="more"></a></li>
 <li>config<br>设置全局的git用户名和邮箱,不带global是设置该仓库的git用户名和邮箱<br><code>git config --global user.name newName</code><br><code>git config --global user.email newEmail</code></li>
 </ol>
 
@@ -488,7 +488,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/blog/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -499,7 +499,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/blog/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -510,7 +510,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/blog/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
