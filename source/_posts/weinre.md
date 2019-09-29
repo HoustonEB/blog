@@ -35,3 +35,6 @@ weinre --boundHost -all-
 --debug   [true | false] : 这个选项与--verbose类似， 会输出更多的信息。默认为false。
 --readTimeout   [seconds] : Server发送信息到Target/Client的超时时间， 默认为5s。
 --deathTimeout   [seconds] : 默认为3倍的readTimeout， 如果页面超过这个时间都没有任何响应， 那么就会断开连接。
+
+### 相关链接
+[weinre文档](https://github.com/nupthale/weinre)
