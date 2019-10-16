@@ -31,3 +31,9 @@ tags: Git
 设置全局的git用户名和邮箱,不带global是设置该仓库的git用户名和邮箱
 `git config --global user.name newName`
 `git config --global user.email newEmail`
+5. 远端代码强制覆盖本地代码
+```bash
+git fetch --all
+git reset --hard origin/master 
+git pull
+```
