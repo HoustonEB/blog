@@ -84,3 +84,8 @@ deploy:
   message: blog-deploy
 # deploy:
 #   type:
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
