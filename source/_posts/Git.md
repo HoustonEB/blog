@@ -37,3 +37,11 @@ git fetch --all
 git reset --hard origin/master 
 git pull
 ```
+6. 查看修改记录
+git log
+--pretty。 这个选项可以使用不同于默认格式的方式展示提交历史。 这个选项有一些内建的子选项供你使用。 比如 oneline 会将每个提交放在一行显示，在浏览大量的提交时非常有用。 另外还有 short，full 和 fuller 选项，它们展示信息的格式基本一致，但是详尽程度不一：
+```bash
+git log --pretty=oneline // 显示全部提交历史
+git log --pretty=oneline src/frontend/service/common.js // 显示某个文件的提交历史
+git show 8dc03eb52d2598fa57671af146769d8c0b0653ee // 查看某个commitId的具体改动
+```
