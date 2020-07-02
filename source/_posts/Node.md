@@ -27,11 +27,11 @@ console.log(__filename);
 console.log(__dirname);
 // 打印: /Users/mjr
 给定两个模块：a 和 b，其中 b 是 a 的依赖文件，且目录结构如下：
-
 /Users/mjr/app/a.js
 /Users/mjr/app/node_modules/b/b.js
 b.js 中的 __filename 的引用会返回 /Users/mjr/app/node_modules/b/b.js，而 a.js 中的 __filename 的引用会返回 /Users/mjr/app/a.js。
 ```
+<!-- more -->
 # path模块
 除了目录结构有区别外，路径也是有区别的。windows是用反斜杠\分割目录或者文件的，而在类Unix的系统中是用的/。
 ```

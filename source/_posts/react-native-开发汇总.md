@@ -40,7 +40,7 @@ tags:
         {rows}
       </ScrollView>
 ```
-
+<!-- more -->
 5.TouchableOpacity
 用来封装自己的Button,因为Button没有触摸的反馈效果.
 - onPress: 触摸触发的函数
