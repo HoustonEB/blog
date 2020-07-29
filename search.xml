@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>正则表达式</title>
+    <url>/blog/2020/07/29/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(<code>\b</code>)，然后是字母a,然后是任意数量的字母或数字(<code>\w*</code>)，最后是单词结束处(<code>\b</code>)。</p>
+<p><code>\d+</code>匹配1个或更多连续的数字。这里的<code>+</code>是和<code>*</code>类似的元字符，不同的是<code>*</code>匹配重复任意次(可能是0次)，而<code>+</code>则匹配重复1次或更多次。</p>
+<p><code>\b\w{6}\b</code> 匹配刚好6个字符的单词。</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>匹配任意的空白符</td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>匹配字符串的结束</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h3 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h3><p>你已经看过了前面的<em>,+,{2},{5,12}这几个匹配重复的方式了。下面是正则表达式中所有的限定符(指定数量的代码，例如</em>,{5,12}等)：</p>
+<table>
+<thead>
+<tr>
+<th>代码/语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>重复零次或更多次</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>重复一次或更多次</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>重复零次或一次</td>
+</tr>
+<tr>
+<td><code>{n}</code></td>
+<td>重复n次</td>
+</tr>
+<tr>
+<td><code>{n,}</code></td>
+<td>重复n次或更多次</td>
+</tr>
+<tr>
+<td><code>{n,m}</code></td>
+<td>重复n到m次</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h3><p>要想查找数字，字母或数字，空白是很简单的，因为已经有了对应这些字符集合的元字符，但是如果你想匹配没有预定义元字符的字符集合(比如元音字母a,e,i,o,u),应该怎么办？</p>
+<p>很简单，你只需要在方括号里列出它们就行了，像[aeiou]就匹配任何一个英文元音字母，[.?!]匹配标点符号(.或?或!)。</p>
+<p>我们也可以轻松地指定一个字符范围，像[0-9]代表的含意与\d就是完全一致的：一位数字；同理[a-z0-9A-Z_]也完全等同于\w（如果只考虑英文的话）。</p>
+<p>下面是一个更复杂的表达式：(?0\d{2}[) -]?\d{8}。</p>
+<p>这个表达式可以匹配几种格式的电话号码，像(010)88886666，或022-22334455，或02912345678等。我们对它进行一些分析吧：首先是一个转义字符(,它能出现0次或1次(?),然后是一个0，后面跟着2个数字(\d{2})，然后是)或-或空格中的一个，它出现1次或不出现(?)，最后是8个数字(\d{8})。</p>
+<h3 id="分枝条件"><a href="#分枝条件" class="headerlink" title="分枝条件"></a>分枝条件</h3><p><code>x|y</code></p>
+<h3 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h3><p>有时需要查找不属于某个能简单定义的字符类的字符。比如想查找除了数字以外，其它任意字符都行的情况，这时需要用到反义：</p>
+<table>
+<thead>
+<tr>
+<th>代码/语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\W</code></td>
+<td>匹配任意不是字母，数字，下划线，汉字的字符</td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>匹配任意不是空白符的字符</td>
+</tr>
+<tr>
+<td><code>\D</code></td>
+<td>匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>匹配不是单词开头或结束的位置</td>
+</tr>
+<tr>
+<td><code>[^x]</code></td>
+<td>匹配除了x以外的任意字符</td>
+</tr>
+<tr>
+<td><code>[^aeiou]</code></td>
+<td>匹配除了aeiou这几个字母以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h3 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h3><p>使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。</p>
+<p>后向引用用于重复搜索前面某个分组匹配的文本。例如，<code>\1</code>代表分组1匹配的文本。难以理解？请看示例：</p>
+<p><code>\b(\w+)\b\s+\1\b</code>可以用来匹配重复的单词，像go go, 或者kitty kitty。这个表达式首先是一个单词，也就是单词开始处和结束处之间的多于一个的字母或数字(<code>\b(\w+)\b</code>)，这个单词会被捕获到编号为1的分组中，然后是1个或几个空白符(<code>\s+</code>)，最后是分组1中捕获的内容（也就是前面匹配的那个单词）(<code>\1</code>)。</p>
+<p>你也可以自己指定子表达式的组名。要指定一个子表达式的组名，请使用这样的语法：(<code>?&lt;Word&gt;\w+</code>)(或者把尖括号换成’也行：(<code>?&#39;Word&#39;\w+</code>)),这样就把<code>\w+</code>的组名指定为<code>Word</code>了。要反向引用这个分组捕获的内容，你可以使用<code>\k&lt;Word&gt;</code>,所以上一个例子也可以写成这样：<code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code>。</p>
+<p>使用小括号的时候，还有很多特定用途的语法。下面列出了最常用的一些：<br>表4.常用分组语法</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>代码/语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>捕获</td>
+<td><code>(exp)</code></td>
+<td>匹配exp,并捕获文本到自动命名的组里</td>
+</tr>
+<tr>
+<td></td>
+<td><code>(?&lt;name&gt;exp)</code></td>
+<td>匹配exp,并捕获文本到名称为name的组里，也可以写成<code>(?&#39;name&#39;exp)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>(?:exp)</code></td>
+<td>匹配exp,不捕获匹配的文本，也不给此分组分配组号</td>
+</tr>
+<tr>
+<td>零宽断言</td>
+<td><code>(?=exp)</code></td>
+<td>匹配exp前面的位置</td>
+</tr>
+<tr>
+<td></td>
+<td><code>(?&lt;=exp)</code></td>
+<td>匹配exp后面的位置</td>
+</tr>
+<tr>
+<td></td>
+<td><code>(?!exp)</code></td>
+<td>匹配后面跟的不是exp的位置</td>
+</tr>
+<tr>
+<td></td>
+<td><code>(?&lt;!exp)</code></td>
+<td>匹配前面不是exp的位置</td>
+</tr>
+<tr>
+<td>注释</td>
+<td><code>(?#comment)</code></td>
+<td>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读</td>
+</tr>
+</tbody>
+</table>
+<h3 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h3><p>接下来的四个用于查找在某些内容(但并不包括这些内容)之前或之后的东西，也就是说它们像<code>\b</code>,<code>^</code>,<code>$</code>那样用于指定一个位置，这个位置应该满足一定的条件(即断言)，因此它们也被称为零宽断言。最好还是拿例子来说明吧：<br><code>(?=exp)</code>也叫零宽度正预测先行断言，它断言自身出现的位置的后面能匹配表达式exp。比如<code>\b\w+(?=ing\b)</code>，匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找I’m singing while you’re dancing.时，它会匹配sing和danc。</p>
+<p><code>(?&lt;=exp)</code>也叫零宽度正回顾后发断言，它断言自身出现的位置的前面能匹配表达式exp。比如<code>(?&lt;=\bre)\w+\b</code>会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找reading a book时，它匹配ading。</p>
+<p>假如你想要给一个很长的数字中每三位间加一个逗号(当然是从右边加起了)，你可以这样查找需要在前面和里面添加逗号的部分：<code>(?&lt;=\d)\d{3})+\b</code>，用它对1234567890进行查找时结果是234567890。</p>
+<p>下面这个例子同时使用了这两种断言：<code>(?&lt;=\s)\d+(?=\s)</code>匹配以空白符间隔的数字(再次强调，不包括这些空白符)。</p>
+<h3 id="负向零宽断言"><a href="#负向零宽断言" class="headerlink" title="负向零宽断言"></a>负向零宽断言</h3><p>前面我们提到过怎么查找不是某个字符或不在某个字符类里的字符的方法(反义)。但是如果我们只是想要确保某个字符没有出现，但并不想去匹配它时怎么办？例如，如果我们想查找这样的单词–它里面出现了字母q,但是q后面跟的不是字母u,我们可以尝试这样：</p>
+<p><code>\b\w*q[^u]\w*\b</code>匹配包含后面不是字母u的字母q的单词。但是如果多做测试(或者你思维足够敏锐，直接就观察出来了)，你会发现，如果q出现在单词的结尾的话，像Iraq,Benq，这个表达式就会出错。这是因为<code>[^u]</code>总要匹配一个字符，所以如果q是单词的最后一个字符的话，后面的<code>[^u]</code>将会匹配q后面的单词分隔符(可能是空格，或者是句号或其它的什么)，后面的<code>\w*\b</code>将会匹配下一个单词，于是<code>\b\w*q[^u]\w*\b</code>就能匹配整个Iraq fighting。负向零宽断言能解决这样的问题，因为它只匹配一个位置，并不消费任何字符。现在，我们可以这样来解决这个问题：<code>\b\w*q(?!u)\w*\b</code>。</p>
+<p>零宽度负预测先行断言<code>(?!exp)</code>，断言此位置的后面不能匹配表达式exp。例如：<code>\d{3}(?!\d)</code>匹配三位数字，而且这三位数字的后面不能是数字；<code>\b((?!abc)\w)+\b</code>匹配不包含连续字符串abc的单词。</p>
+<p>同理，我们可以用(?&lt;!exp),零宽度负回顾后发断言来断言此位置的前面不能匹配表达式exp：(?&lt;![a-z])\d{7}匹配前面不是小写字母的七位数字。</p>
+<p>一个更复杂的例子：(?&lt;=&lt;(\w+)&gt;).<em>(?=&lt;\/\1&gt;)匹配不包含属性的简单HTML标签内里的内容。(?&lt;=&lt;(\w+)&gt;)指定了这样的前缀：被尖括号括起来的单词(比如可能是<b>)，然后是.</b></em>(任意的字符串),最后是一个后缀(?=&lt;\/\1&gt;)。注意后缀里的\/，它用到了前面提过的字符转义；\1则是一个反向引用，引用的正是捕获的第一组，前面的(\w+)匹配的内容，这样如果前缀实际上是<b>的话，后缀就是</b>了。整个表达式匹配的是<b>和</b>之间的内容(再次提醒，不包括前缀和后缀本身)。</p>
+<h3 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h3><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例<code>a.*b</code>，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。</p>
+<p>有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号<code>?</code>。这样<code>.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：</p>
+<p><code>a.*?b</code>匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。</p>
+<table>
+<thead>
+<tr>
+<th>代码/语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*?</code></td>
+<td>重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td><code>+?</code></td>
+<td>重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td><code>??</code></td>
+<td>重复0次或1次，但尽可能少重复</td>
+</tr>
+<tr>
+<td><code>{n,m}?</code></td>
+<td>重复n到m次，但尽可能少重复</td>
+</tr>
+<tr>
+<td><code>{n,}?</code></td>
+<td>重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody>
+</table>
+<p>eg:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="string">'&lt;span style="font-size: 14px; font-family: Microsoft YaHei,sans-serif;"&gt;尊敬的&lt;u&gt;&lt;strong&gt; $&#123;Candidate_name&#125; &lt;/strong&gt;&lt;$&#123;Candidate_mobile_phone&#125;'</span>;</span><br><span class="line">content.replace(<span class="regexp">/\$&#123;(.*?)&#125;/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match, paramKey</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(match, paramKey) </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 懒惰匹配</span></span><br><span class="line"><span class="comment">     * $&#123;Candidate_name&#125; Candidate_name</span></span><br><span class="line"><span class="comment">     * $&#123;Candidate_mobile_phone&#125; Candidate_mobile_phone</span></span><br><span class="line"><span class="comment">    **/</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><p>replace() 方法返回一个由替换值（replacement）替换部分或所有的模式（pattern）匹配项后的新字符串。<br>模式可以是一个字符串或者一个正则表达式.<br>替换值可以是一个字符串或者一个每次匹配都要调用的回调函数。如果pattern是字符串，则仅替换第一个匹配项。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="string">'dfsfsdog dsfsDog wodogrd'</span>;</span><br><span class="line">content.replace(<span class="string">'dog'</span>, <span class="string">'YU'</span>); <span class="comment">// 返回个新字符串"dfsfsYU dsfsDog wodogrd"</span></span><br><span class="line">content.replace(<span class="regexp">/dog/gi</span>, <span class="string">'YU'</span>); <span class="comment">// "dfsfsYU dsfsYU woYUrd"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换字符串中的两个单词</span></span><br><span class="line"><span class="keyword">var</span> re = <span class="regexp">/(\w+)\s(\w+)/</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"John Smith"</span>;</span><br><span class="line"><span class="keyword">var</span> newstr = str.replace(re, <span class="string">"$2, $1"</span>);</span><br><span class="line"><span class="comment">// Smith, John</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h4><p><a href="https://deerchao.cn/tutorials/regex/regex.htm" target="_blank" rel="noopener">正则表达式30分钟入门教程</a></p>
+]]></content>
+      <tags>
+        <tag>正则表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>URL</title>
+    <url>/blog/2020/07/08/URL/</url>
+    <content><![CDATA[<h2 id="URL对象"><a href="#URL对象" class="headerlink" title="URL对象"></a>URL对象</h2><h3 id="createObjectURL"><a href="#createObjectURL" class="headerlink" title="createObjectURL"></a>createObjectURL</h3><p>URL.createObjectURL() 静态方法会创建一个 DOMString，其中包含一个表示参数中给出的对象的URL。这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的URL 对象表示指定的 File 对象或 Blob 对象。<br><code>objectURL = URL.createObjectURL(object);</code></p>
+<ul>
+<li>参数(object)<br>用于创建 URL 的 File 对象、Blob 对象或者 MediaSource 对象。</li>
+<li>返回值(objectURL)<br>一个DOMString包含了一个对象URL，该URL可用于指定源 object的内容。<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3>在每次调用 createObjectURL() 方法时，都会创建一个新的 URL 对象，即使你已经用相同的对象作为参数创建过。当不再需要这些 URL 对象时，每个对象必须通过调用 URL.revokeObjectURL() 方法来释放。<a id="more"></a>
+浏览器在 document 卸载的时候，会自动释放它们，但是为了获得最佳性能和内存使用状况，你应该在安全的时机主动释放掉它们。<h3 id="revokeObjectURL"><a href="#revokeObjectURL" class="headerlink" title="revokeObjectURL"></a>revokeObjectURL</h3>URL.revokeObjectURL() 静态方法用来释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。</li>
+</ul>
+<p>你可以在 sourceopen 被处理之后的任何时候调用 revokeObjectURL()。这是因为 createObjectURL() 仅仅意味着将一个媒体元素的 src 属性关联到一个 MediaSource 对象上去。调用revokeObjectURL() 使这个潜在的对象回到原来的地方，允许平台在合适的时机进行垃圾收集。<br><code>window.URL.revokeObjectURL(objectURL);</code></p>
+<ul>
+<li>参数(objectURL)<br>一个 DOMString，表示通过调用 URL.createObjectURL() 方法产生的 URL 对象。</li>
+<li>返回值<br>undefined</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Js</category>
+      </categories>
+      <tags>
+        <tag>URL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Blob</title>
+    <url>/blog/2020/07/08/Blob/</url>
+    <content><![CDATA[<h2 id="Blob对象"><a href="#Blob对象" class="headerlink" title="Blob对象"></a>Blob对象</h2><p>Blob, Binary Large Object的缩写.代表二进制类型的大对象.<br>在Web中，Blob类型的对象表示不可变的类似文件对象的原始数据，通俗点说，就是Blob对象是二进制数据，但它是类似文件对象的二进制数据，因此可以像操作File对象一样操作Blob对象，实际上，File继承自Blob。<br><code>Blob(blobParts[, options])</code><br>参数说明：<br>blobParts：数组类型，数组中的每一项连接起来构成Blob对象的数据，数组中的每项元素可以是ArrayBuffer, ArrayBufferView, Blob, DOMString 。<br>options：可选项，字典格式类型，可以指定如下两个属性：</p>
+<ul>
+<li>type，默认值为 “”，它代表了将会被放入到blob中的数组内容的MIME类型。</li>
+<li>endings，默认值为”transparent”，用于指定包含行结束符\n的字符串如何被写入。 它是以下两个值中的一个： “native”，表示行结束符会被更改为适合宿主操作系统文件系统的换行符； “transparent”，表示会保持blob中保存的结束符不变。<a id="more"></a>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> data1 = <span class="string">"a"</span>;</span><br><span class="line">    <span class="keyword">var</span> data2 = <span class="string">"b"</span>;</span><br><span class="line">    <span class="keyword">var</span> data3 = <span class="string">"&lt;div style='color:red;'&gt;This is a blob&lt;/div&gt;"</span>;</span><br><span class="line">    <span class="keyword">var</span> data4 = &#123; <span class="string">"name"</span>: <span class="string">"abc"</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> blob1 = <span class="keyword">new</span> Blob([data1]);</span><br><span class="line">    <span class="keyword">var</span> blob2 = <span class="keyword">new</span> Blob([data1, data2]);</span><br><span class="line">    <span class="keyword">var</span> blob3 = <span class="keyword">new</span> Blob([data3]);</span><br><span class="line">    <span class="keyword">var</span> blob4 = <span class="keyword">new</span> Blob([<span class="built_in">JSON</span>.stringify(data4)]);</span><br><span class="line">    <span class="keyword">var</span> blob5 = <span class="keyword">new</span> Blob([data4]);</span><br><span class="line">    <span class="keyword">var</span> blob6 = <span class="keyword">new</span> Blob([data3, data4]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(blob1);  <span class="comment">//输出：Blob &#123;size: 1, type: ""&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(blob2);  <span class="comment">//输出：Blob &#123;size: 2, type: ""&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(blob3);  <span class="comment">//输出：Blob &#123;size: 44, type: ""&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(blob4);  <span class="comment">//输出：Blob &#123;size: 14, type: ""&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(blob5);  <span class="comment">//输出：Blob &#123;size: 15, type: ""&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(blob6);  <span class="comment">//输出：Blob &#123;size: 59, type: ""&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>size代表Blob 对象中所包含数据的字节数。这里要注意，使用字符串和普通对象创建Blob时的不同，blob4使用通过JSON.stringify把data4对象转换成json字符串，blob5则直接使用data4创建，两个对象的size分别为14和15。blob4的size等于14很容易理解，因为JSON.stringify(data4)的结果为：”{“name”:”abc”}”，正好14个字节(不包含最外层的引号)。blob5的size等于15是如何计算而来的呢？实际上，当使用普通对象创建Blob对象时，相当于调用了普通对象的toString()方法得到字符串数据，然后再创建Blob对象。所以，blob5保存的数据是”[object Object]”，是15个字节(不包含最外层的引号)。</p>
+<h3 id="slice方法"><a href="#slice方法" class="headerlink" title="slice方法"></a>slice方法</h3><p>Blob对象有一个slice方法，返回一个新的 Blob对象，包含了源 Blob对象中指定范围内的数据。<br>slice([start[, end[, contentType]]])<br>复制代码参数说明：<br>start： 可选，代表 Blob 里的下标，表示第一个会被会被拷贝进新的 Blob 的字节的起始位置。如果传入的是一个负数，那么这个偏移量将会从数据的末尾从后到前开始计算。<br>end： 可选，代表的是 Blob 的一个下标，这个下标-1的对应的字节将会是被拷贝进新的Blob 的最后一个字节。如果你传入了一个负数，那么这个偏移量将会从数据的末尾从后到前开始计算。<br>contentType： 可选，给新的 Blob 赋予一个新的文档类型。这将会把它的 type 属性设为被传入的值。它的默认值是一个空的字符串。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">例如：</span><br><span class="line">    <span class="keyword">var</span> data = <span class="string">"abcdef"</span>;</span><br><span class="line">    <span class="keyword">var</span> blob1 = <span class="keyword">new</span> Blob([data]);</span><br><span class="line">    <span class="keyword">var</span> blob2 = blob1.slice(<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(blob1);  <span class="comment">//输出：Blob &#123;size: 6, type: ""&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(blob2);  <span class="comment">//输出：Blob &#123;size: 3, type: ""&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>复制代码通过slice方法，从blob1中创建出一个新的blob对象，size等于3。</p>
+<h2 id="Blob使用场景"><a href="#Blob使用场景" class="headerlink" title="Blob使用场景"></a>Blob使用场景</h2><p>分片上传<br>前面已经说过，File继承自Blob，因此我们可以调用slice方法对大文件进行分片长传。代码如下：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">uploadFile</span>(<span class="params">file</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> chunkSize = <span class="number">1024</span> * <span class="number">1024</span>;   <span class="comment">// 每片1M大小</span></span><br><span class="line">  <span class="keyword">var</span> totalSize = file.size;</span><br><span class="line">  <span class="keyword">var</span> chunkQuantity = <span class="built_in">Math</span>.ceil(totalSize/chunkSize);  <span class="comment">//分片总数</span></span><br><span class="line">  <span class="keyword">var</span> offset = <span class="number">0</span>;  <span class="comment">// 偏移量</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">"POST"</span>,<span class="string">"http://xxxx/upload?fileName="</span>+file.name);</span><br><span class="line">    xhr.overrideMimeType(<span class="string">"application/octet-stream"</span>);</span><br><span class="line">    </span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(xhr.readyState === XMLHttpRequest.DONE &amp;&amp; xhr.status === <span class="number">200</span>) &#123;</span><br><span class="line">        ++offset;</span><br><span class="line">        <span class="keyword">if</span>(offset === chunkQuantity) &#123;</span><br><span class="line">          alert(<span class="string">"上传完成"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(offset === chunkQuantity<span class="number">-1</span>)&#123;</span><br><span class="line">          blob = file.slice(offset*chunkSize, totalSize);   <span class="comment">// 上传最后一片</span></span><br><span class="line">          reader.readAsBinaryString(blob);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          blob = file.slice(offset*chunkSize, (offset+<span class="number">1</span>)*chunkSize); </span><br><span class="line">          reader.readAsBinaryString(blob);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">"上传出错"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(xhr.sendAsBinary) &#123;</span><br><span class="line">      xhr.sendAsBinary(e.target.result);   <span class="comment">// e.target.result是此次读取的分片二进制数据</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      xhr.send(e.target.result);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">var</span> blob = file.slice(<span class="number">0</span>, chunkSize);</span><br><span class="line">   reader.readAsBinaryString(blob);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码还可以进一步丰富，比如显示当前的上传进度，使用多个XMLHttpRequest对象并行上传对象（需要传递分片数据的位置参数给服务器端）等。</p>
+]]></content>
+      <categories>
+        <category>Js</category>
+      </categories>
+      <tags>
+        <tag>Blob</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React</title>
+    <url>/blog/2020/06/30/React/</url>
+    <content><![CDATA[<h3 id="React-Refs转发"><a href="#React-Refs转发" class="headerlink" title="React Refs转发"></a>React Refs转发</h3><ol>
+<li>在函数式组件中转发</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = React.forwardRef(<span class="function"><span class="keyword">function</span> (<span class="params">props, ref</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> h.button(<span class="string">''</span>, &#123;</span><br><span class="line">        ref,</span><br><span class="line">        onClick: props.onClick</span><br><span class="line">    &#125;, </span><br><span class="line">    props.children</span><br><span class="line">    );</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">View</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    btnRef;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.btnRef = React.createRef();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            h.div(<span class="string">''</span>, &#123;&#125;,</span><br><span class="line">                h(Button, &#123;<span class="attr">ref</span>: <span class="keyword">this</span>.btnRef&#125;, <span class="string">'dom转发'</span>),</span><br><span class="line">                h(Button, &#123;&#125;, <span class="string">'未dom转发'</span>),</span><br><span class="line">                h(Button, &#123;</span><br><span class="line">                    onClick: <span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>.btnRef, <span class="string">'子组件btnDom'</span>)&#125;</span><br><span class="line">                &#125;, <span class="string">'获取子组件dom'</span>)</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// btnRef输出: &#123;current: button&#125;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ol start="2">
+<li>在高阶组件中转发</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = React.forwardRef(<span class="function"><span class="keyword">function</span> (<span class="params">props, ref</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> h.button(<span class="string">''</span>, &#123;</span><br><span class="line">        ref,</span><br><span class="line">        ...props</span><br><span class="line">    &#125;,</span><br><span class="line">        props.children</span><br><span class="line">    );</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> wrapComp = <span class="function"><span class="keyword">function</span> (<span class="params">component</span>) </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">wrapCompView</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">        <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">            <span class="keyword">super</span>(props);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        render() &#123;</span><br><span class="line">            <span class="keyword">let</span> &#123; forwardedRef, children, ...rest &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">            <span class="keyword">return</span> h(component, &#123;</span><br><span class="line">                ref: forwardedRef,</span><br><span class="line">                ...rest</span><br><span class="line">            &#125;, children);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> React.forwardRef(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> h(wrapCompView, &#123; <span class="attr">forwardedRef</span>: ref, ...props &#125;, props.children);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">View</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    btnRef;</span><br><span class="line">    wrapBtnComp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.btnRef = React.createRef();</span><br><span class="line">        <span class="keyword">this</span>.wrapBtnComp = wrapComp(Button);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            h.div(<span class="string">''</span>, &#123;&#125;,</span><br><span class="line">                h(<span class="keyword">this</span>.wrapBtnComp, &#123; <span class="attr">ref</span>: <span class="keyword">this</span>.btnRef &#125;, <span class="string">'dom转发'</span>),</span><br><span class="line">                h(Button, &#123;</span><br><span class="line">                    onClick: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>.btnRef, <span class="string">'子组件btnDom'</span>) &#125;</span><br><span class="line">                &#125;, <span class="string">'获取子组件dom'</span>)</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note danger"><p>1.第二个参数 ref 只在使用 React.forwardRef 定义组件时存在。常规函数和 class 组件不接收 ref 参数，且 props 中也不存在 ref。<br>2.Ref 转发不仅限于 DOM 组件，你也可以转发 refs 到 class 组件实例中。<br>3.上面的示例有一点需要注意：refs 将不会透传下去。这是因为 ref 不是 prop 属性。就像 key 一样，其被 React 进行了特殊处理。如果你对 HOC 添加 ref，该 ref 将引用最外层的容器组件，而不是被包裹的组件</p></div>
+<hr>
+<h3 id="Hook"><a href="#Hook" class="headerlink" title="Hook"></a>Hook</h3>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>D3</title>
+    <url>/blog/2019/11/10/D3/</url>
+    <content><![CDATA[<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>D3.scale<br>D3.scale.linear()</p>
+<h3 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h3><p><a href="http://www.ruanyifeng.com/blog/2018/08/svg.html" target="_blank" rel="noopener">阮一峰svg</a><br><a href="https://blog.csdn.net/Peter_Luoz/article/details/89213575" target="_blank" rel="noopener">Peter_Luoz 文章</a><br><a href="https://greenmzc.github.io/2016/11/07/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E9%A5%BC%E7%8A%B6%E5%9B%BE/" target="_blank" rel="noopener">Green d3</a><br><a href="https://juejin.im/entry/59156c4b8d6d8100585ef337" target="_blank" rel="noopener">juejin d3</a><br><a href="https://github.com/gafish/gafish.github.com/issues/4" target="_blank" rel="noopener">d3入门教程</a><br><a href="http://wiki.jikexueyuan.com/project/d3wiki/interactive.html" target="_blank" rel="noopener">http://wiki.jikexueyuan.com/project/d3wiki/interactive.html</a></p>
+]]></content>
+      <categories>
+        <category>D3</category>
+      </categories>
+      <tags>
+        <tag>D3</tag>
+        <tag>可视化图表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react-native 开发汇总</title>
+    <url>/blog/2019/10/29/react-native-%E5%BC%80%E5%8F%91%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>1.View<br>2.Text<br>3.ScrollView</p>
+<ul>
+<li>showsHorizontalScrollIndicator: 隐藏水平滚动条</li>
+</ul>
+<p>4.RefreshControl</p>
+<ul>
+<li>refreshing: 是否显示刷新器</li>
+<li>onRefresh: 当滚动距离顶部距离0,触发函数</li>
+<li>progressBackgroundColor: loading背景色(Android)</li>
+<li>tintColor: 刷新器(圈圈)的颜色(iOS)</li>
+<li>size: 刷新器的大小0大1小</li>
+<li>title: 再刷新器下显示的文字(iOS)</li>
+<li>titleColor: 刷新起下文字的颜色(iOS)</li>
+<li>progressViewOffset: 刷新起距离上部的距离(Android)</li>
+<li>添加上拉刷新<br>&lt;–! more –&gt;<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ScrollView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">style</span>=<span class="string">&#123;styles.scrollview&#125;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">refreshControl</span>=<span class="string">&#123;</span></span></span><br><span class="line">          &lt;RefreshControl</span><br><span class="line">            refreshing=&#123;this.state.isRefreshing&#125;</span><br><span class="line">            onRefresh=&#123;this._onRefresh&#125;</span><br><span class="line">            tintColor="#ff0000"</span><br><span class="line">            title="Loading..."</span><br><span class="line">            titleColor="#00ff00"</span><br><span class="line">            colors=&#123;['#ff0000', '#00ff00', '#0000ff']&#125;</span><br><span class="line">            progressBackgroundColor="#ffff00"</span><br><span class="line">          /&gt;</span><br><span class="line">        &#125;&gt;</span><br><span class="line">        &#123;rows&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">ScrollView</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<p>5.TouchableOpacity<br>用来封装自己的Button,因为Button没有触摸的反馈效果.</p>
+<ul>
+<li>onPress: 触摸触发的函数</li>
+<li>activeOpacity: 指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）.<br>6.WebView</li>
+<li>已被rn移除,改用<a href="https://github.com/react-native-community/react-native-webview" target="_blank" rel="noopener">react-native-webview</a></li>
+</ul>
+<hr>
+<h2 id="导航器"><a href="#导航器" class="headerlink" title="导航器"></a>导航器</h2><p>1.react-navigation</p>
+<ul>
+<li>StackNavigator - 为应用程序提供了一种切换的方法,每次切换时,新的页面会放置再堆栈的顶部</li>
+<li>TabNavigator - 用于设置具有多个Tab页的页面</li>
+<li>DrawerNavigator - 用于设置抽屉导航的页面</li>
+</ul>
+<h2 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h2><p>1.react-native-swiper</p>
+<blockquote>
+<p>v1.5.14<br><code>npm i react-native-swiper --save</code><br>v1.6.0-nightly<br><code>npm i --save react-native-swiper@nightly</code><br>安装v1.5.14版本会报错,因为rn高版本移除了<viewpagerandroid>,而swipper依赖于它.<br>v1.6.0替换掉了这个标签.</viewpagerandroid></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>react-native</category>
+      </categories>
+      <tags>
+        <tag>react-native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react-native</title>
+    <url>/blog/2019/10/22/react-native/</url>
+    <content><![CDATA[<h2 id="发版app"><a href="#发版app" class="headerlink" title="发版app"></a>发版app</h2><p>1.生成签名密钥<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -genkeypair -v -keystore my-release-key.keystore -<span class="built_in">alias</span> my-key-alias -keyalg RSA -keysize 2048 -validity 10000</span><br></pre></td></tr></table></figure></p>
+<p>这个命令会在当前目录生成<span class="label primary">my-release-key.keystore</span>文件<br>2.设置gradle变量<br>-把<span class="label primary">my-release-key.keystore</span>文件放入android/app文件夹下.<br>-编辑~/.gradle/gradle.properties（全局配置，对所有项目有效）或是项目目录/android/gradle.properties（项目配置，只对所在项目有效）。<br>如果没有gradle.properties文件你就自己创建一个，添加如下的代码（注意把其中的<em>**</em>替换为相应密码）<br> 注意：~符号表示用户目录，比如 windows 上可能是C:\Users\用户名，而 mac 上可能是/Users/用户名。<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MYAPP_RELEASE_STORE_FILE=my-release-key.keystore</span><br><span class="line">MYAPP_RELEASE_KEY_ALIAS=my-key-alias</span><br><span class="line">MYAPP_RELEASE_STORE_PASSWORD=*****</span><br><span class="line">MYAPP_RELEASE_KEY_PASSWORD=*****</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<div class="note warning"><p>一旦你在 Play Store 发布了你的应用，如果想修改签名，就必须用一个不同的包名来重新发布你的应用（这样也会丢失所有的下载数和评分）。所以请务必备份好你的密钥库和密码</p></div>
+<p>提示：如果你不想以明文方式保存密码，同时你使用的是 macOS 系统，那么你也可以把密码保存到钥匙串（Keychain）中。这样一来你就可以省略掉上面配置中的后两行（即 MYAPP_RELEASE_STORE_PASSWORD 和 MYAPP_RELEASE_KEY_PASSWORD）<br>3.生成发行APK包<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> android</span><br><span class="line">./gradlew assembleRelease</span><br></pre></td></tr></table></figure></p>
+<p>Gradle 的assembleRelease参数会把所有用到的 JavaScript 代码都打包到一起，然后内置到 APK 包中。如果你想调整下这个行为（比如 js 代码以及静态资源打包的默认文件名或是目录结构等），可以看看android/app/build.gradle文件，然后琢磨下应该怎么修改以满足你的需求。<br>注意：请确保 gradle.properties 中没有包含<em>org.gradle.configureondemand=true</em>，否则会跳过 js 打包的步骤，导致最终生成的 apk 是一个无法运行的空壳。<br>生成的 APK 文件位于android/app/build/outputs/apk/release/app-release.apk，它已经可以用来发布了。</p>
+<p>4.测试应用的发行版本<br>在把发行版本提交到 Play Store 之前，你应该做一次最终测试。输入以下命令可以在设备上安装发行版本：<br><code>react-native run-android --variant=release</code><br>注意–variant=release参数只能在你完成了上面的签名配置之后才可以使用。你现在可以关掉运行中的 packager 了，因为你所有的代码和框架依赖已经都被打包到 apk 包中，可以离线运行了。<br>注意：在 debug 和 release 版本间来回切换安装时可能会报错签名不匹配，此时需要先卸载前一个版本再尝试安装。</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>1.发版app时报的错误<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Execution failed <span class="keyword">for</span> task <span class="string">':app:bundleReleaseJsAndAssets'</span>.</span><br><span class="line">&gt; Could not list contents of <span class="string">'/Users/v_yuzhuang01/Desktop/mobileApp/elm-react-native/node_modules/fsevents/node_modules/.bin/node-pre-gyp'</span>. Couldn<span class="string">'t follow symbolic link.</span></span><br></pre></td></tr></table></figure></p>
+<p>解决方法: 删除node_modules,重新npm install</p>
+]]></content>
+      <categories>
+        <category>react-native</category>
+      </categories>
+      <tags>
+        <tag>react-native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>require.context()</title>
+    <url>/blog/2019/10/16/require-context/</url>
+    <content><![CDATA[<h2 id="require-context是什么"><a href="#require-context是什么" class="headerlink" title="require.context是什么"></a>require.context是什么</h2><p>是webpack的api,通过执行require.context()函数获取一个特定的上下文,主要用来自动化导入模块,在前端工程中,如果遇到从一个文件引入很多模块的情况,可以使用这个api,它回遍历文件夹中的指定文件,然后自动导入,使得不需要每次显示的条用import导入模块.<br><a id="more"></a></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>require.context接受三个参数</p>
+<ol>
+<li>directory {String} -读取文件的路径</li>
+<li>useSubdirectories {Boolean} -是否遍历文件的子目录</li>
+<li>regExp {RegExp} -匹配文件的正则</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>.context(<span class="string">'../../src/components'</span>, <span class="literal">true</span>, /\/_demo-normal\/index\.js$/)</span><br></pre></td></tr></table></figure>
+<p>require.context返回三个属性</p>
+<ol>
+<li>resolve {Function} -接受一个参数request,request为components文件夹下面匹配文件的相对路径,返回这个匹配文件相对于整个工程的相对路径</li>
+<li>keys {Function} -返回匹配成功模块的名字组成的数组</li>
+<li>id {String} -执行环境的id,返回的是一个字符串,主要用在module.hot.accept,应该是热加载?<img src="/blog/2019/10/16/require-context/2.jpg">
+<img src="/blog/2019/10/16/require-context/1.jpg">
+这个Module模块和使用import导入的模块是一样的</li>
+</ol>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ol>
+<li>在demoModule中自动加载所有demo生成路由.</li>
+<li>使用svg</li>
+</ol>
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>require.context</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>weinre</title>
+    <url>/blog/2019/09/29/weinre/</url>
+    <content><![CDATA[<h2 id="weinre是什么"><a href="#weinre是什么" class="headerlink" title="weinre是什么"></a>weinre是什么</h2><p>weinre(Web Inspector Remote).是一种远程调试的工具,在电脑上可以调试手机远端的页面,包括样式,查看js变量和页面上的报警信息.<br>可以通过<code>document.body.style.color=&#39;red&#39;</code>实时改变文字颜色.</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ul>
+<li>目标页面（target）：被调试的页面，页面已嵌入weinre的远程js，下文会介绍；</li>
+<li>Debug客户端（client）：本地的Web Inspector调试客户端；</li>
+<li>Debug服务端（agent）：一个HTTP Server，为目标页面与Debug客户端建立通信。</li>
+</ul>
+<img src="/blog/2019/09/29/weinre/1.png">
+<a id="more"></a>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ol>
+<li>mac</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// 安装</span><br><span class="line">npm i -g weinre</span><br><span class="line">// 开启服务</span><br><span class="line">weinre --boundHost -all-</span><br></pre></td></tr></table></figure>
+<img src="/blog/2019/09/29/weinre/2.jpg">
+<h2 id="options"><a href="#options" class="headerlink" title="options"></a>options</h2><p>–help : 显示Weinre的Help<br>–httpPort   [portNumber] : 设置Weinre使用的端口号， 默认是8080<br>–boundHost  [hostname | ip address | -all-] : 默认是’localhost’， 这个参数是为了限制可以访问Weinre Server的设备， 设置为-all-或者指定ip， 那么任何设备都可以访问Weinre Server。<br>–verbose   [true | false] : 如果想看到更多的关于Weinre运行情况的输出， 那么可以设置这个选项为true， 默认为false；<br>–debug   [true | false] : 这个选项与–verbose类似， 会输出更多的信息。默认为false。<br>–readTimeout   [seconds] : Server发送信息到Target/Client的超时时间， 默认为5s。<br>–deathTimeout   [seconds] : 默认为3倍的readTimeout， 如果页面超过这个时间都没有任何响应， 那么就会断开连接。</p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p><a href="https://github.com/nupthale/weinre" target="_blank" rel="noopener">weinre文档</a></p>
+]]></content>
+      <categories>
+        <category>移动端调试工具</category>
+      </categories>
+      <tags>
+        <tag>weinre</tag>
+        <tag>移动端调试工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gulp配置</title>
+    <url>/blog/2019/09/21/gulp%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h3 id="gulp-api"><a href="#gulp-api" class="headerlink" title="gulp api"></a>gulp api</h3><ol>
+<li>task<br>gulp.task([taskName], taskFunction).<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'build'</span>, [<span class="string">'task1'</span>, <span class="string">'task2'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">gulp在<span class="number">4</span>版本后不在支持这种嵌套任务的写法.改用一下写法.</span><br><span class="line">gulp.task(<span class="string">'build, gulp.series('</span>task1<span class="string">', '</span>task2<span class="string">'), function() &#123;console.log('</span><span class="keyword">this</span> is build task<span class="string">')&#125;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">gulp 执行多个任务是存在异步的问题.如果需要上一个任务执行完毕后执行任务二.需要使用cb();</span></span><br><span class="line"><span class="string">eg: gulp.task('</span>task1<span class="string">', function(cb) &#123;</span></span><br><span class="line"><span class="string">  console.log('</span>taks1 content<span class="string">');</span></span><br><span class="line"><span class="string">  cb()</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string">gulp.taks('</span>task2<span class="string">',gulp.series('</span>task1<span class="string">', function() &#123;</span></span><br><span class="line"><span class="string">  console.log('</span>task2<span class="string">');</span></span><br><span class="line"><span class="string">&#125;)&#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">result: task1 content  task2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<ol start="2">
+<li><p>series(串行)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2'</span>);</span><br><span class="line">    cb();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'test1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'test1'</span>);</span><br><span class="line">        cb();</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">'test2'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'test2'</span>);</span><br><span class="line">    cb();</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">'default'</span>, gulp.series(<span class="string">'test1'</span>, <span class="string">'test2'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">// cb函数要放在异步函数内,否则无效. 输出test2 end test1</span></span><br><span class="line">result: test1 test2 end</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>parallel(并行)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'test1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'start1'</span>)</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'test1'</span>);</span><br><span class="line">        cb();</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">'test2'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'start2'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'test2'</span>);</span><br><span class="line">    cb();</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">'default'</span>, gulp.parallel(<span class="string">'test1'</span>, <span class="string">'test2'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">result: start1 start2 test2 end test1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="gulp-plugins"><a href="#gulp-plugins" class="headerlink" title="gulp plugins"></a>gulp plugins</h3><ol>
+<li><p>less</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> less = <span class="built_in">require</span>(<span class="string">'gulp-less'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">   gulp.src(<span class="string">'./css/**/*.less'</span>).pipe(</span><br><span class="line">       less()</span><br><span class="line">   ).pipe(</span><br><span class="line">       gulp.dest(<span class="string">'./release/css'</span>)</span><br><span class="line">   );</span><br><span class="line">    cb()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/gulp-community/gulp-less" target="_blank" rel="noopener">gulp-less</a></p>
+</li>
+<li><p>less-plugin-autoprefix</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> LessAutoprefix = <span class="built_in">require</span>(<span class="string">'less-plugin-autoprefix'</span>);</span><br><span class="line"><span class="keyword">var</span> autoprefix = <span class="keyword">new</span> LessAutoprefix(&#123; <span class="attr">browsers</span>: [<span class="string">'last 2 versions'</span>] &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> gulp.src(<span class="string">'./less/**/*.less'</span>)</span><br><span class="line">  .pipe(less(&#123;</span><br><span class="line">    plugins: [autoprefix]</span><br><span class="line">  &#125;))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">'./public/css'</span>));</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/less/less-plugin-autoprefix" target="_blank" rel="noopener">less-plugin-autoprefix</a></p>
+</li>
+<li><p>gulp-sourcemaps<br>定位错误位置</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> plugin1 = <span class="built_in">require</span>(<span class="string">'gulp-plugin1'</span>);</span><br><span class="line"><span class="keyword">var</span> plugin2 = <span class="built_in">require</span>(<span class="string">'gulp-plugin2'</span>);</span><br><span class="line"><span class="keyword">var</span> sourcemaps = <span class="built_in">require</span>(<span class="string">'gulp-sourcemaps'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'javascript'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  gulp.src(<span class="string">'src/**/*.js'</span>)</span><br><span class="line">    .pipe(sourcemaps.init())</span><br><span class="line">      .pipe(plugin1())</span><br><span class="line">      .pipe(plugin2())</span><br><span class="line">    .pipe(sourcemaps.write(<span class="string">'../maps'</span>))</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/gulp-sourcemaps/gulp-sourcemaps" target="_blank" rel="noopener">gulp-sourcemaps</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>gulp</category>
+      </categories>
+      <tags>
+        <tag>gulp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git reset和git revert</title>
+    <url>/blog/2019/09/17/git%20reset%E5%92%8Cgit%20revert/</url>
+    <content><![CDATA[<ol>
+<li><p>get reset<br>回退到指定版本,提交历史中看不到指定版本后的提交历史.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git revert<br>反转指定版本的修改,回生成新的revert的commit历史信息.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git revert 版本号</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git fetch 和 git pull</title>
+    <url>/blog/2019/09/17/git%20fetch%E5%92%8Cgit%20pull/</url>
+    <content><![CDATA[<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p><code>git fetch</code>和<code>git pull</code>都是同步远端的代码,区别是前者将远端的更新全部更新到本地git远端文件夹(remotes)内,不会自动merge.<br><img src="/blog/2019/09/17/git%20fetch和git%20pull/1.png"><br><a id="more"></a><br>后者即会更新本地远端文件夹,也会合并到本地当前分支.<br><img src="/blog/2019/09/17/git%20fetch和git%20pull/2.png"></p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
+<li><p>git fetch</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch origin master // 拉取远程主机的master分支最新内容</span><br><span class="line">git <span class="built_in">log</span> -p FETCH_HEAD // 查看拉取的信息</span><br><span class="line">git merge FETCH_HEAD // 合并fetch最新的内容到当前分支</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git pull</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull 远程主机名 远程分支名:本地分支名 // eg: git pull origin master:dev</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解码函数</title>
+    <url>/blog/2019/09/17/%E8%A7%A3%E7%A0%81%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="解码函数"><a href="#解码函数" class="headerlink" title="解码函数"></a>解码函数</h3><p>encode(加密) decode(解密)<br><code>encodeURI decodeURI encodeURIComponent decodeURIComponent</code>四个函数都可以进行加密解密.</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
+<li><p>encodeURI不能加密如<code>#</code>的特殊符号</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">encodeURI</span>(<span class="string">'http://w3schools.com/my test.asp?name=ståle&amp;car=saab'</span>)</span><br><span class="line">输出 =&gt; <span class="string">"http://w3schools.com/my%20test.asp?name=st%C3%A5le&amp;car=saab"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">decodeURI</span>(<span class="string">"http://w3schools.com/my%20test.asp?name=st%C3%A5le&amp;car=saab"</span>)</span><br><span class="line">输出 =&gt; <span class="string">"http://w3schools.com/my test.asp?name=ståle&amp;car=saab"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>encodeURIComponent可以对特俗符号加密</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">"http://w3schools.com/my test.asp?name=ståle&amp;car=saab"</span>)</span><br><span class="line">输出 =&gt; <span class="string">"http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">decodeURIComponent</span>(<span class="string">"http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab"</span>)</span><br><span class="line">输出 =&gt; <span class="string">"http://w3schools.com/my test.asp?name=ståle&amp;car=saab"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<span class="label primary">都使用encodeURIComponent decodeURIComponent</span>]]></content>
+      <categories>
+        <category>常用函数</category>
+      </categories>
+      <tags>
+        <tag>常用函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RequireJS</title>
+    <url>/blog/2019/09/16/RequireJS/</url>
+    <content><![CDATA[<h3 id="载入脚本文件"><a href="#载入脚本文件" class="headerlink" title="载入脚本文件"></a>载入脚本文件</h3><p>RequireJS采用一种不同的方法去加载脚本文件和用传统的用<code>&lt;script&gt;</code>tags.它也可以运行的快速和被优化过,RequireJS首要的目的是模块化代码.鼓励用<span class="label info">moduleIDs</span>来代替script标签的URLs.<br>RequireJS加载所有代码根据一个基础的路径(baseUrl).一个页面的入口js文件用<code>data-main 属性</code>来定义.</p>
+<h3 id="data-main-入口点"><a href="#data-main-入口点" class="headerlink" title="data-main 入口点"></a>data-main 入口点</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--when require.js loads it will inject another script tag</span></span><br><span class="line"><span class="comment">    (with async attribute) for scripts/main.js--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-main</span>=<span class="string">"scripts/main"</span> <span class="attr">src</span>=<span class="string">"scripts/require.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>注意: script标签载入脚本文件时,是异步的.所以当引入两个脚本文件时,会出现后一个脚本执行结束时间要短于第一个文件.<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-main</span>=<span class="string">"scripts/main"</span> <span class="attr">src</span>=<span class="string">"scripts/require.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"scripts/other.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// contents of main.js:</span></span><br><span class="line"><span class="built_in">require</span>.config(&#123;</span><br><span class="line">    paths: &#123;</span><br><span class="line">        foo: <span class="string">'libs/foo-1.1.3'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// contents of other.js:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// This code might be called before the require.config() in main.js</span></span><br><span class="line"><span class="comment">// has executed. When that happens, require.js will attempt to</span></span><br><span class="line"><span class="comment">// load 'scripts/foo.js' instead of 'scripts/libs/foo-1.1.3.js'</span></span><br><span class="line"><span class="built_in">require</span>([<span class="string">'foo'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">foo</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>因此最好不用<code>data-main</code>属性, 而是使用一下形式.其它的脚本文件用require()调用.<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"scripts/require.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="built_in">require</span>([<span class="string">'scripts/config'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// Configuration loaded now, safe to do other require calls</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">// that depend on that config.</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">require</span>([<span class="string">'foo'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">foo</span>) </span>&#123;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="定义一个模块"><a href="#定义一个模块" class="headerlink" title="定义一个模块"></a>定义一个模块</h3><ol>
+<li><p>如果模块没有依赖项,只是简单的键值对,只需要传入对象.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Inside file my/shirt.js:</span></span><br><span class="line">define(&#123;</span><br><span class="line">    color: <span class="string">"black"</span>,</span><br><span class="line">    size: <span class="string">"unisize"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果模块没有依赖项,只是需要在导出内容前做一些工作,可以传入function</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//my/shirt.js now does setup work</span></span><br><span class="line"><span class="comment">//before returning its module definition.</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//Do setup work here</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        color: <span class="string">"black"</span>,</span><br><span class="line">        size: <span class="string">"unisize"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果有依赖项.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//my/shirt.js now has some dependencies, a cart and inventory</span></span><br><span class="line"><span class="comment">//module in the same directory as shirt.js</span></span><br><span class="line">define([<span class="string">"./cart"</span>, <span class="string">"./inventory"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">cart, inventory</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//return an object to define the "my/shirt" module.</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            color: <span class="string">"blue"</span>,</span><br><span class="line">            size: <span class="string">"large"</span>,</span><br><span class="line">            addToCart: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                inventory.decrement(<span class="keyword">this</span>);</span><br><span class="line">                cart.add(<span class="keyword">this</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"scripts/require.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="built_in">require</span>.config(&#123;</span></span><br><span class="line"><span class="actionscript">    baseUrl: <span class="string">"/another/path"</span>,</span></span><br><span class="line"><span class="undefined">    paths: &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="string">"some"</span>: <span class="string">"some/v1.0"</span></span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    waitSeconds: 15</span></span><br><span class="line"><span class="undefined">  &#125;);</span></span><br><span class="line"><span class="javascript">  <span class="built_in">require</span>( [<span class="string">"some/module"</span>, <span class="string">"my/module"</span>, <span class="string">"a.js"</span>, <span class="string">"b.js"</span>],</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span><span class="params">(someModule,    myModule)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//This function will be called when all the dependencies</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//listed above are loaded. Note that this function could</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//be called before the page is loaded.</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//This callback is optional.</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  );</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>坑1. 自定义模块引入第三方库,未生效的问题</p></div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">引入第三方模块时,用了别名<span class="string">`eg: lib/jquery`</span></span><br><span class="line"> <span class="comment">// THIS WILL NOT WORK</span></span><br><span class="line">    define([<span class="string">'lib/jquery'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$</span>) </span>&#123;...&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决办法</span></span><br><span class="line">requirejs.config(&#123;</span><br><span class="line">    baseUrl: <span class="string">'js/lib'</span>,</span><br><span class="line">    paths: &#123;</span><br><span class="line">        <span class="comment">// the left side is the module ID,</span></span><br><span class="line">        <span class="comment">// the right side is the path to</span></span><br><span class="line">        <span class="comment">// the jQuery file, relative to baseUrl.</span></span><br><span class="line">        <span class="comment">// Also, the path should NOT include</span></span><br><span class="line">        <span class="comment">// the '.js' file extension. This example</span></span><br><span class="line">        <span class="comment">// is using jQuery 1.9.0 located at</span></span><br><span class="line">        <span class="comment">// js/lib/jquery-1.9.0.js, relative to</span></span><br><span class="line">        <span class="comment">// the HTML page.</span></span><br><span class="line">        jquery: <span class="string">'jquery-1.9.0'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">define([<span class="string">'jquery'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$</span>) </span>&#123;...&#125;);</span><br></pre></td></tr></table></figure>
+<p>参考链接: </p>
+<ul>
+<li><a href="https://requirejs.org/docs/api.html" target="_blank" rel="noopener">RequireJS</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>模块化</category>
+      </categories>
+      <tags>
+        <tag>module</tag>
+        <tag>RequireJS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>装饰器</title>
+    <url>/blog/2019/09/03/%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
+    <content><![CDATA[<p>装饰器(Decorator)是一种与类(class)相关的语法,用来注释和修改类和类方法.<br>装饰器是一种函数,写成<code>@+函数名</code>.可以放在类和类方法的定义前面.<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">@frozen <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  @configurable(<span class="literal">false</span>)</span><br><span class="line">  @enumerable(<span class="literal">true</span>)</span><br><span class="line">  method() &#123;&#125;</span><br><span class="line"></span><br><span class="line">  @throttle(<span class="number">500</span>)</span><br><span class="line">  expensiveMethod() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面代码一共使用了四个装饰器，一个用在类本身，另外三个用在类方法。它们不仅增加了代码的可读性，清晰地表达了意图，而且提供一种方便的手段，增加或修改类的功能.<br><a id="more"></a></p>
+<h2 id="类的装饰"><a href="#类的装饰" class="headerlink" title="类的装饰"></a>类的装饰</h2><p>装饰器可以装饰整个类, 在这个类上添加了静态属性isTestable<br>装饰器函数的第一个参数是被装饰的类<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">@testable</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestableClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    target.isTestable = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一个参数不够用,还可以在wrap一层<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">isTestable</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">        target.isTestable = isTestable;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@testable(<span class="literal">true</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test1</span> </span>&#123;&#125;</span><br><span class="line">test1.isTestable; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">@testable(<span class="literal">false</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test2</span> </span>&#123;&#125;</span><br><span class="line">test2.isTestable; <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>要添加实例属性<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.prototype.isTestable = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@testable</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestableClass</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> MyTestableClass();</span><br><span class="line">obj.isTestable <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="方法的装饰"><a href="#方法的装饰" class="headerlink" title="方法的装饰"></a>方法的装饰</h2><p>装饰器第一个参数是类的原型对象,装饰器的本意是要“装饰”类的实例,但是这个时候实例还没生成,所以只能去装饰原型(这不同于类的装饰,那种情况时target参数指的是类本身)<br>第二个参数是所要装饰的属性名，第三个参数是该属性的描述对象.<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  @readonly</span><br><span class="line">  nameTest() &#123; <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.first&#125;</span> <span class="subst">$&#123;<span class="keyword">this</span>.last&#125;</span>`</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readonly</span>(<span class="params">target, name, descriptor</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// descriptor对象原来的值如下</span></span><br><span class="line">  <span class="comment">// &#123;</span></span><br><span class="line">  <span class="comment">//   value: nameTest,</span></span><br><span class="line">  <span class="comment">//   enumerable: false,</span></span><br><span class="line">  <span class="comment">//   configurable: true,</span></span><br><span class="line">  <span class="comment">//   writable: true</span></span><br><span class="line">  <span class="comment">// &#125;;</span></span><br><span class="line">  descriptor.writable = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">readonly(Person.prototype, <span class="string">'name'</span>, descriptor);</span><br><span class="line"><span class="comment">// 类似于</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Person.prototype, <span class="string">'name'</span>, descriptor);</span><br></pre></td></tr></table></figure></p>
+<p>打印日志的功能<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line">  @log</span><br><span class="line">  add(a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> oldValue = descriptor.value;</span><br><span class="line"></span><br><span class="line">  descriptor.value = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Calling <span class="subst">$&#123;name&#125;</span> with`</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">return</span> oldValue.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> math = <span class="keyword">new</span> <span class="built_in">Math</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// passed parameters should get logged now</span></span><br><span class="line">math.add(<span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>类的装饰器</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端模块化</title>
+    <url>/blog/2019/09/02/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <content><![CDATA[<p>模块化可以提高代码的复用率,方便管理,防止全局中的变量污染.<br>模块化的工具: AMD,CMD,CommonJS,ES6<br>CommonJs用于服务器,AMD和CMD用于浏览器.</p>
+<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>即Asynchronous Module Definition，中文名是异步模块定义的意思.AMD的代表是require.js.<br>在入口处用<span class="label primary">require.config()</span>指定引用路径,用<span class="label primary">define()</span>定义模块,用<span class="label primary">require()</span>加载模块.<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>.config(&#123;</span><br><span class="line">  baseUrl: <span class="string">"js/lib"</span>,</span><br><span class="line">  paths: &#123;</span><br><span class="line">    <span class="string">"jquery"</span>: <span class="string">"jquery.min"</span>,  <span class="comment">//实际路径为js/lib/jquery.min.js</span></span><br><span class="line">    <span class="string">"underscore"</span>: <span class="string">"underscore.min"</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">define([<span class="string">'jquery'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log($)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h2><p>CMD 即Common Module Definition通用模块定义，sea.js是它的实现<br>…</p>
+<h2 id="AMD和CMD的区别"><a href="#AMD和CMD的区别" class="headerlink" title="AMD和CMD的区别"></a>AMD和CMD的区别</h2><p>对依赖模块的执行时机不同，注意：不是加载的时机，模块加载的时机是一样的！！！<br>文件加载顺序： 都是先加载1.js，再加载2.js，最后加载3.js<br>模块运行顺序：<br>AMD： 3.js，2.js，1.js，，，即如果模块以及该模块的依赖都加载完了，那么就执行。。。 比如 3.js 加载完后，发现自己也没有依赖啊，那么直接执行3.js的回调了，，，2.js加载完后探查到依赖的3.js也加载完了，那么2.js就执行自己的回调了。。。。 主模块一定在最后执行<br>CMD： 1.js，2.js，3.js，，，即先执行主模块1.js，碰到require(‘2.js’)就执行2.js，2.js中碰到require(‘3.js’)就执行3.js</p>
+<hr>
+<h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><p>CommonJS的实现主要是node.js<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// module.exports和exports的区别</span></span><br><span class="line"><span class="comment">//node中模块导出的是Module.exports而不是exports</span></span><br><span class="line"><span class="comment">// test.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">'test'</span>;</span><br><span class="line">exports.name = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'name'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入</span></span><br><span class="line"><span class="keyword">const</span> test = <span class="built_in">require</span>(<span class="string">'./test.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test); <span class="comment">// test</span></span><br><span class="line">test.name(); <span class="comment">// name is not a function</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修改exports不会改变module.exports</span></span><br><span class="line">exports = <span class="string">'test'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> d = <span class="built_in">require</span>(<span class="string">'./test'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(d, <span class="string">'2222222'</span>) <span class="comment">// &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<div class="note primary"><p>1.module.exports 初始值为一个空对象 {}<br>2.exports 是指向的 module.exports 的引用<br>3.require() 返回的是 module.exports 而不是 exports</p></div>
+<p><strong>例子</strong><br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test2.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.about = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'-'</span> + <span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入</span></span><br><span class="line"><span class="keyword">const</span> test2 = <span class="built_in">require</span>(<span class="string">'./test2'</span>);</span><br><span class="line"><span class="keyword">let</span> i = <span class="keyword">new</span> test2(<span class="string">'li'</span>, <span class="number">21</span>);</span><br><span class="line">i.about(); <span class="comment">// li-21</span></span><br></pre></td></tr></table></figure></p>
+<div class="note primary"><p>何时用module.exports, 何时用exports.<br>当你的模块导出的类型是array, 构造函数等特殊类型时用module.exports.<br>当你的模块导出的是对象用exports.</p></div>
+<hr>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><h3 id="export"><a href="#export" class="headerlink" title="export"></a>export</h3><p>export用于导出变量,import用于导入.<br>1.导出变量<br>第一种形式<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> first = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> second = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> three = <span class="number">3</span>;</span><br></pre></td></tr></table></figure></p>
+<p>第二种形式<br>推荐第二种.因为可以在底部直接看见导出的全部内容.<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> first = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> second = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> three = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;first, second, three&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>2.导出函数<br>第一种形式<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>第二种形式<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    f <span class="keyword">as</span> f1 <span class="comment">// 导出可以起别名</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.导出类<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">f</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.导出default<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// test.js 一个文件只能导出一个default变量</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="number">42</span>;</span><br></pre></td></tr></table></figure></p>
+<p>导入不需要加大括号<br><code>import test from &#39;./test.js&#39;;</code> 将导出的default变量命名为test<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foo函数对外无效,还是匿名 foo.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'foo'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'foo'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>import fn from &#39;./foo.js&#39;;</code> 将导出的default函数名命名为fn<br><div class="note warning"><p>export语句输出的接口,与其对应的值是动态绑定关系,即通过该接口,可以取到模块实时的值.</p></div></p>
+<hr>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; lastName <span class="keyword">as</span> surname &#125; <span class="keyword">from</span> <span class="string">'./profile.js'</span>;</span><br></pre></td></tr></table></figure>
+<p>import会执行lodash模块,但不会输入任何值.<br><code>import &#39;lodash&#39;;</code><br>import整体加载模块.用<code>*</code>号指定一个对象,加载导出的值都会注入到这个对象上.<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// io.js</span></span><br><span class="line"><span class="keyword">var</span> first = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> second = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    first,</span><br><span class="line">    second</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> fu <span class="keyword">from</span> <span class="string">'./io.js'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(fu.first, fu.second);</span><br></pre></td></tr></table></figure>
+<h2 id="ES6和CommonJS的差异"><a href="#ES6和CommonJS的差异" class="headerlink" title="ES6和CommonJS的差异"></a>ES6和CommonJS的差异</h2><p>1.CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。<br>2.CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</p>
+]]></content>
+      <categories>
+        <category>模块化</category>
+      </categories>
+      <tags>
+        <tag>module</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动画回调</title>
+    <url>/blog/2019/09/02/%E5%8A%A8%E7%94%BB%E5%9B%9E%E8%B0%83/</url>
+    <content><![CDATA[<h2 id="过渡事件"><a href="#过渡事件" class="headerlink" title="过渡事件"></a>过渡事件</h2><p>css中设置了transition属性,会触发过渡事件.</p>
+<ul>
+<li><code>transitionend</code>过渡结束时触发</li>
+</ul>
+<div class="note danger"><p>当设置<code>transition: all</code>时会触发多次事件</p></div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//关于重复调用transition</span></span><br><span class="line"><span class="keyword">var</span> handleTransitionEndEvent = <span class="function"><span class="keyword">function</span>(<span class="params">elem, fn, duration</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> called=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在每次transitionEnd的事件后执行该函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!called) &#123;</span><br><span class="line">    fn();</span><br><span class="line">    called=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">elem.addEventListener(transitionEnd,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">callback();</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过setTimeout来补救windowphone中不触发事件的问题</span></span><br><span class="line"></span><br><span class="line">setTimeout(callback,duration);</span><br><span class="line"></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<div class="note danger"><p>兼容问题</p></div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 不同浏览器兼容 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">whichTransitionEvent</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> t;</span><br><span class="line">    <span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(<span class="string">'fakeelement'</span>);</span><br><span class="line">    <span class="keyword">var</span> transitions = &#123;</span><br><span class="line"></span><br><span class="line">        <span class="string">'transition'</span>:<span class="string">'transitionend'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">'OTransition'</span>:<span class="string">'oTransitionEnd'</span>,</span><br><span class="line"></span><br><span class="line">         <span class="string">'MozTransition'</span>:<span class="string">'transitionend'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">'WebkitTransition'</span>:<span class="string">'webkitTransitionEnd'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">'MsTransition'</span>:<span class="string">'msTransitionEnd'</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(t <span class="keyword">in</span> transitions)&#123;</span><br><span class="line">        <span class="keyword">if</span>( el.style[t] !== <span class="literal">undefined</span> )&#123;</span><br><span class="line">            <span class="keyword">return</span> transitions[t];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动画事件"><a href="#动画事件" class="headerlink" title="动画事件"></a>动画事件</h2><p>css中设置了animation属性 ,会触发动画事件.</p>
+<ul>
+<li><code>animationend</code>动画结束时触发</li>
+<li><code>animationiteration</code>动画重复播放时触发</li>
+<li><code>animationstart</code>动画开始播放时触发</li>
+</ul>
+]]></content>
+      <categories>
+        <category>动画</category>
+      </categories>
+      <tags>
+        <tag>动画</tag>
+        <tag>事件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm命令</title>
+    <url>/blog/2019/08/26/npm%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<ol>
+<li>查看npm全局安装的包<br><code>npm list -g --depth 0</code></li>
+<li>root权限npm全局安装,仍会权限不足, –unsafe-perm<br><code>sudo npm install --unsafe-perm=true</code></li>
+<li>更新包<br><code>npm update</code>更新全部包(慎用)<br><code>npm update 包名</code>更新某个包名<br><code>npm update 包名 -g</code>更新全局的某个包<br>也可以用install更新包<code>npm i name@版本号</code></li>
+<li>package.json中^ ~的区别<ul>
+<li>比如”classnames”: “2.2.5”，表示安装2.2.5的版本</li>
+<li>比如 “babel-plugin-import”: “~1.1.0”,表示安装1.1.x的最新版本（不低于1.1.0），但是不安装1.2.x，也就是说安装时不改变大版本号和次要版本号</li>
+<li>比如 “antd”: “^3.1.4”,，表示安装3.1.4及以上的版本，但是不安装4.0.0，也就是说安装时不改变大版本号。</li>
+</ul>
+</li>
+<li>查看npmjs服务器上包的版本信息<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm view react versions；这种方式可以查看npm服务器上所有的react版本信息；</span><br><span class="line">npm view react version； 这种方式只能查看react的最新的版本是哪一个；</span><br><span class="line">npm info react 这种方式和第一种类似，也可以查看react所有的版本，但是能查出更多的关于react的信息；</span><br><span class="line"></span><br><span class="line">2、查看本地已经安装的包的版本信息：</span><br><span class="line">npm ls react （查看某个项目安装的react），命令必须在某个项目下执行</span><br><span class="line">npm ls react -g (查看全局安装的react)</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>npm</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git</title>
+    <url>/blog/2019/08/22/Git/</url>
+    <content><![CDATA[<h2 id="常用git命令"><a href="#常用git命令" class="headerlink" title="常用git命令"></a>常用git命令</h2><ol>
+<li>清除git缓存,添加新的文件进入暂存区<br><code>git rm -r --cached .</code><br><code>git add .</code><div class="note info"><p>应用场景:</p>
+<pre><code>- 先暂存文件,没有git ignore文件
+- 将项目里的第三方git仓库化为己有
+</code></pre></div></li>
+<li>拉取remote分支,并在本地创建分支<br><code>git checkout -b local-branch origin/remote-branch</code></li>
+<li>tag<br><strong>查看本地全部tag</strong><br><code>git tag</code><br><strong>给某个commit添加tag</strong><br><code>git tag tagName commitHash</code><br><strong>推动本地tag到远端</strong><br><code>git push --tags origin</code><br><strong>删除tag</strong><br><code>git tag -d tagName</code><br><strong>查看tag是在哪个commit打的</strong><br><code>git show tagName</code><a id="more"></a></li>
+<li>config<br>设置全局的git用户名和邮箱,不带global是设置该仓库的git用户名和邮箱<br><code>git config --global user.name newName</code><br><code>git config --global user.email newEmail</code></li>
+<li><p>远端代码强制覆盖本地代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看修改记录<br>git log<br>–pretty。 这个选项可以使用不同于默认格式的方式展示提交历史。 这个选项有一些内建的子选项供你使用。 比如 oneline 会将每个提交放在一行显示，在浏览大量的提交时非常有用。 另外还有 short，full 和 fuller 选项，它们展示信息的格式基本一致，但是详尽程度不一：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --pretty=oneline // 显示全部提交历史</span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline src/frontend/service/common.js // 显示某个文件的提交历史</span><br><span class="line">git show 8dc03eb52d2598fa57671af146769d8c0b0653ee // 查看某个commitId的具体改动</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm发包</title>
+    <url>/blog/2019/08/21/npm%E5%8F%91%E5%8C%85/</url>
+    <content><![CDATA[<h2 id="添加Change-Log"><a href="#添加Change-Log" class="headerlink" title="添加Change Log"></a>添加Change Log</h2><ol>
+<li><strong>安装commitizen</strong><br><code>npm install commitizen -g</code><br>在你的项目里执行一下命令,进行初始化<br><code>commitizen init cz-conventional-changelog --save-dev --save-exact</code><br><span class="label info">commitizen</span>包的作用提供<code>git cz</code>命令代替<code>git commit -m</code></li>
+</ol>
+<img src="/blog/2019/08/21/npm发包/add-commit.png">
+<a id="more"></a>
+<ol start="2">
+<li><p><strong>安装conventional-changelog-cli</strong><br><code>npm install -g conventional-changelog-cli</code><br>进入你的项目并生成CHANGELOG.md文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd my-project</span><br><span class="line">conventional-changelog -p angular -i CHANGELOG.md -s 生成最新一条的commit记录</span><br></pre></td></tr></table></figure>
+<p><code>conventional-changelog -p angular -i CHANGELOG.md -s -r 0</code> 生成以往全部的commit记录到changelog文件中</p>
+<span class="label warning">会复写已存在的changelog.md文件</span></li>
+<li>推荐的工作流<ul>
+<li>修改代码</li>
+<li>commit changes</li>
+<li>确保持续集成成功</li>
+<li>提升package.json中包的版本 <span class="label warning">利用npm version 更改版本</span></li>
+<li>生成changelog记录(<code>npm run changelog</code>)</li>
+<li>提交package.json和changelog.md的改动</li>
+<li>Push</li>
+</ul>
+</li>
+</ol>
+<p><strong>npm version</strong><br>npm version prepatch的作用: 1.修改预备修订版的版本号 2.生成tag<br>生成changelog会根据tag生成多条记录<br>0.0.1-1 =&gt; 主版本号.此版本号.修订号-预发布号</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">npm version</th>
+<th>功能 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"> major</td>
+<td>主版本号 <br>- 如果没有预发布号: <br>1.直接升级一位大号，其他位都置为0<br>- 如果有预发布号: <br>1.中号和小号都为0,则不升级大号,而将预发布号删掉.即2.0.0-1变成2.0.0,这就是预发布的作用<br>2.如果中号和小号有任意一个不是0,那边会升级一位大号,其他位都置为0，清空预发布号.即 2.0.1-0变成3.0.0</td>
+</tr>
+<tr>
+<td style="text-align:center"> premajor</td>
+<td>预备主版本 <br>- 直接升级大号，中号和小号置为0，增加预发布号为0</td>
+</tr>
+<tr>
+<td style="text-align:center"> minor</td>
+<td>次版本号 <br>- 如果没有预发布号: <br>1.升级一位中号，大号不动，小号置为空<br>- 如果有预发布号: <br>1. 如果小号为0，则不升级中号，将预发布号去掉<br>2. 如果小号不为0，同理没有预发布号</td>
+</tr>
+<tr>
+<td style="text-align:center"> preminor</td>
+<td>预备次版本 <br>- 直接升级此版本号,增加预发布号为0</td>
+</tr>
+<tr>
+<td style="text-align:center"> patch</td>
+<td>修订号 <br>- 如果没有预发布号: 升级修订号,去掉预发布号<br>- 如果有预发布号: 去掉预发布号,其它不动</td>
+</tr>
+<tr>
+<td style="text-align:center"> prepatch</td>
+<td>预备修订版 <br>- 直接升级修订号, 增加预发布号为0</td>
+</tr>
+<tr>
+<td style="text-align:center"> prerelease</td>
+<td>预发布版本 <br>- 如果没有预发布号: 升级修订号,预发布号为0<br>- 如果有预发布号: 升级预发布号</td>
+</tr>
+</tbody>
+</table>
+ <div class="note primary"><p>补充:<br>  <span class="label primary">在package.json中用别名执行命令</span><br>  “changelog”: “conventional-changelog -p angular -i CHANGELOG.md -s”</p></div>
+<p> <a href="https://shields.io/category/downloads" target="_blank" rel="noopener">添加包的标签</a></p>
+]]></content>
+      <categories>
+        <category>npm</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+        <tag>npm发包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>charles</title>
+    <url>/blog/2019/08/15/charles/</url>
+    <content><![CDATA[<div class="note info"><p>charles常用技巧</p></div>
+<ol>
+<li>断点mock数据<br>右键你需要打断点的请求.</li>
+</ol>
+<img src="/blog/2019/08/15/charles/charles4.jpg">
+<a id="more"></a>
+<p>刷新页面后可以编辑发出的请求和修改响应的数据.</p>
+<img src="/blog/2019/08/15/charles/charles5.jpg">
+<hr>
+<div class="note warning"><p>使用charles经常会遇到的问题总结:</p></div>
+<ol>
+<li>抓不到https请求<br>安装证书.</li>
+</ol>
+<img src="/blog/2019/08/15/charles/charles1.jpg">
+<p>开启SSL代理,监听所有host和port.</p>
+<img src="/blog/2019/08/15/charles/charles2.jpg">
+<ol start="2">
+<li>请求没有被charles代理成功.<br>将本地的http和https代理到本机ip地址,port是charles的默认端口号8888</li>
+</ol>
+<img src="/blog/2019/08/15/charles/charles3.jpg">
+]]></content>
+      <categories>
+        <category>抓包工具</category>
+      </categories>
+      <tags>
+        <tag>charles</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo</title>
+    <url>/blog/2019/08/13/hexo/</url>
+    <content><![CDATA[<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><ol>
+<li><p>开启服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成新文章</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new 'your article name'</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<ol start="3">
+<li><p>生成打包文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清除打包文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署blog<br>需要配置_config.yml</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成新html</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page 'your html name'</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ol>
+<li><p>链接</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123;% link [text] [url] [external] [title] %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img  fullimage fiddler1.jpg image %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>note</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&#123;% note info %&#125;</span><br><span class="line">test</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>default、primary、success、info、warning、danger<br><strong>hexo参考docs</strong></p>
+<ul>
+<li><a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">hexo</a></li>
+<li><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next主题</a></li>
+<li><a href="https://anoyer.cn/article/Hexo%20%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.html" target="_blank" rel="noopener">第三方插件</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Fiddler</title>
+    <url>/blog/2019/05/06/fiddler/</url>
+    <content><![CDATA[<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
+<ol>
+<li>windows:</li>
+</ol>
+<ul>
+<li>无脑下一步.</li>
+</ul>
+<ol start="2">
+<li>mac:</li>
+</ol>
+<ul>
+<li><a href="https://www.telerik.com/download/fiddler/fiddler-osx-beta" target="_blank" rel="noopener">下载fiddler</a></li>
+<li>下载fiddler运行的环境<a href="http://www.mono-project.com/download/#download-mac" target="_blank" rel="noopener">mono下载</a></li>
+<li>下载证书用于fiddler访问https协议的请求<br><code>/Library/Frameworks/Mono.framework/Versions/&lt;Mono Version&gt;/bin/mozroots --import --sync</code><br><strong>mac环境下Library路径在user的上级, 不是个人users下的Library</strong></li>
+<li>将mono加入全局环境变量中<code>sudo vi ~/.bash_profile</code>, 并写入<br><code>export MONO_HOME=/Library/Frameworks/Mono.framework/Versions/5.4.1</code><br><code>export PATH=$PATH:$MONO_HOME/bin</code></li>
+<li>cd到对应的fiddler解压后的文件夹里,运行32位的fiddler<code>mono --arch=32 Fiddler.exe</code><br><strong><mono version>mono版本取前三位</mono></strong><a id="more"></a>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3></li>
+</ul>
+<hr>
+<img src="/blog/2019/05/06/fiddler/fiddler1.jpg" class="full-image" title="image">
+<img src="/blog/2019/05/06/fiddler/fiddler2.jpg" title="image">
+<p>fiddler要代理手机上的请求需满足</p>
+<ul>
+<li>代理地址需要填pc的ip地址<code>ifconfig</code>端口号是8888.</li>
+<li>手机和pc要再同一个网下.<img src="/blog/2019/05/06/fiddler/fiddler3.jpg" title="image"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>抓包工具</category>
+      </categories>
+      <tags>
+        <tag>抓包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux</title>
+    <url>/blog/2019/05/04/Linux/</url>
+    <content><![CDATA[<h4 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h4><hr>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 进入目录</span><br><span class="line"></span><br><span class="line"><span class="built_in">pwd</span> 列出当前的路径</span><br><span class="line"></span><br><span class="line">ls 列出目录的结构</span><br><span class="line">  -a 列出隐藏的文件</span><br><span class="line"></span><br><span class="line">mkdir 创建文件夹</span><br><span class="line"></span><br><span class="line">cat 查看文件的内容</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">touch 文件名.格式 创建指定的文件</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'文件内容'</span> &gt;&gt; 文件名.文件格式 创建文件内容和文件</span><br><span class="line"></span><br><span class="line">cp 复制目录时不会复制子目录和子文件</span><br><span class="line">  -r 递归复制,会复制子目录和子文件</span><br><span class="line"></span><br><span class="line">mv 移动文件夹和目录, 还可以重命名文件和目录</span><br><span class="line">eg: mv test.md test.txt 重命名</span><br><span class="line">    mv test.md .. 移动到上一层目录</span><br><span class="line">    mv test.md ../test2/ 移动到上一层的test2的目录下</span><br><span class="line">    mv test.md ../test2 移动到上一层并重新命名为test2</span><br><span class="line">    mv test1 test2 将目录test1重命名为test2</span><br><span class="line"></span><br><span class="line">rm 删除文件和文件夹</span><br><span class="line">  -rf 递归删除所有子目录和子文件</span><br><span class="line"></span><br><span class="line">rmdir 只能删除空目录</span><br><span class="line"></span><br><span class="line">vi 编辑文件</span><br><span class="line">  i 编辑内容</span><br><span class="line">  esc 退出操作</span><br><span class="line">  <span class="built_in">shift</span>+z+z 保存退出vi模式</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Linux命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node</title>
+    <url>/blog/2019/05/04/Node/</url>
+    <content><![CDATA[<h1 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h1><span class="label primary">__dirname</span>
+<p>当前模块的目录名。 与 __filename 的 path.dirname() 相同。</p>
+<p>示例，从 /Users/mjr 运行 node example.js：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br><span class="line"><span class="comment">// 打印: /Users/mjr</span></span><br><span class="line"><span class="built_in">console</span>.log(path.dirname(__filename));</span><br><span class="line"><span class="comment">// 打印: /Users/mjr</span></span><br></pre></td></tr></table></figure></p>
+<span class="label primary">__filename</span>
+<p>当前模块的文件名。 这是当前的模块文件的绝对路径（符号链接会被解析）。<br>对于主程序，这不一定与命令行中使用的文件名相同。<br>示例：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">从 /Users/mjr 运行 node example.js：</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(__filename);</span><br><span class="line"><span class="comment">// 打印: /Users/mjr/example.js</span></span><br><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br><span class="line"><span class="comment">// 打印: /Users/mjr</span></span><br><span class="line">给定两个模块：a 和 b，其中 b 是 a 的依赖文件，且目录结构如下：</span><br><span class="line">/Users/mjr/app/a.js</span><br><span class="line">/Users/mjr/app/node_modules/b/b.js</span><br><span class="line">b.js 中的 __filename 的引用会返回 /Users/mjr/app/node_modules/b/b.js，而 a.js 中的 __filename 的引用会返回 /Users/mjr/app/a.js。</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="path模块"><a href="#path模块" class="headerlink" title="path模块"></a>path模块</h1><p>除了目录结构有区别外，路径也是有区别的。windows是用反斜杠\分割目录或者文件的，而在类Unix的系统中是用的/。<br><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">windows的路径： C:\temp\myfile.html</span><br><span class="line">类Unix的路径：  <span class="regexp">/tmp/my</span><span class="keyword">file</span>.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="path-basename-path-ext"><a href="#path-basename-path-ext" class="headerlink" title="path.basename(path, ext)"></a>path.basename(path, ext)</h3><p>path<br>ext 文件扩展名(可选)<br>获取路径中的文件名<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.basename(<span class="string">'/foo/bar/baz/asdf/quux.html'</span>);</span><br><span class="line"><span class="comment">// 返回: 'quux.html'</span></span><br><span class="line"></span><br><span class="line">path.basename(<span class="string">'/foo/bar/baz/asdf/quux.html'</span>, <span class="string">'.html'</span>);</span><br><span class="line"><span class="comment">// 返回: 'quux'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="path-dirname-path"><a href="#path-dirname-path" class="headerlink" title="path.dirname(path)"></a>path.dirname(path)</h3><p>获取路径的文件夹,不获取文件名<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.dirname(<span class="string">'/foo/bar/baz/asdf/quux'</span>);</span><br><span class="line"><span class="comment">// 返回: '/foo/bar/baz/asdf'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="path-extname-path"><a href="#path-extname-path" class="headerlink" title="path.extname(path)"></a>path.extname(path)</h3><p>获取路径的扩展名即从 path 的最后一部分中的最后一个 .（句号）字符到字符串结束。<br>如果 path 的最后一部分没有 . 或 path 的文件名的第一个字符是 .，则返回一个空字符串。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.extname(<span class="string">'index.html'</span>);</span><br><span class="line"><span class="comment">// 返回: '.html'</span></span><br><span class="line">path.extname(<span class="string">'/etc/a/index.html'</span>);</span><br><span class="line"><span class="comment">// 返回: '.html'</span></span><br><span class="line"></span><br><span class="line">path.extname(<span class="string">'index.coffee.md'</span>);</span><br><span class="line"><span class="comment">// 返回: '.md'</span></span><br><span class="line"></span><br><span class="line">path.extname(<span class="string">'index.'</span>);</span><br><span class="line"><span class="comment">// 返回: '.'</span></span><br><span class="line"></span><br><span class="line">path.extname(<span class="string">'index'</span>);</span><br><span class="line"><span class="comment">// 返回: ''</span></span><br><span class="line"></span><br><span class="line">path.extname(<span class="string">'.index'</span>);</span><br><span class="line"><span class="comment">// 返回: ''</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="path-format-object"><a href="#path-format-object" class="headerlink" title="path.format(object)"></a>path.format(object)</h3><p>path.format() 方法会从一个对象返回一个路径字符串。</p>
+<p>语法：path.format(pathObject)</p>
+<p>pathObject <object> 要转换成路径字符串的设置对象<br>dir <string> 所在目录，提供了 pathObject.dir，则 pathObject.root 会被忽略<br>root <string> 根目录<br>base <string> 文件全名。如果pathObject.base 存在，则 pathObject.ext 和 pathObject.name 会被忽略<br>name <string> 文件名字（不带后缀）<br>ext <string> 文件后缀<br>返回: <string> 返回完整路径字符串</string></string></string></string></string></string></object></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.format(&#123;</span><br><span class="line">  dir: <span class="string">'/home/user/dir'</span>,</span><br><span class="line">  base: <span class="string">'file.txt'</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 返回: '/home/user/dir/file.txt'</span></span><br><span class="line"></span><br><span class="line">path.format(&#123;</span><br><span class="line">  root: <span class="string">'/'</span>,</span><br><span class="line">  name: <span class="string">'file'</span>,</span><br><span class="line">  ext: <span class="string">'.txt'</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 返回: '/file.txt'</span></span><br></pre></td></tr></table></figure>
+<h3 id="path-parse-path"><a href="#path-parse-path" class="headerlink" title="path.parse(path)"></a>path.parse(path)</h3><p>path.parse() 方法返回一个对象，对象的属性表示 path 的元素。<br>parse方法跟 format方法正好相反，所以不赘述。直接看例子：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> pathObj = path.parse(<span class="string">'/users/home/aicoder/a.html'</span>);</span><br><span class="line"><span class="built_in">console</span>.dir(pathObj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出如下</span></span><br><span class="line">&#123; <span class="attr">root</span>: <span class="string">'/'</span>,</span><br><span class="line">  dir: <span class="string">'/users/home/aicoder'</span>,</span><br><span class="line">  base: <span class="string">'a.html'</span>,</span><br><span class="line">  ext: <span class="string">'.html'</span>,</span><br><span class="line">  name: <span class="string">'a'</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="path-join"><a href="#path-join" class="headerlink" title="path.join()"></a>path.join()</h3><p>path.join() 方法使用平台特定的分隔符把全部给定的 path 片段连接到一起，并规范化生成的路径。<br>长度为零的 path 片段会被忽略。 如果连接后的路径字符串是一个长度为零的字符串，则返回 ‘.’，表示当前工作目录。</p>
+<p>参数说明：<br>…paths <string> 一个路径片段的序列。<br>返回: <string></string></string></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.join(<span class="string">'/foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz/asdf'</span>, <span class="string">'quux'</span>, <span class="string">'..'</span>);</span><br><span class="line"><span class="comment">// 返回: '/foo/bar/baz/asdf'</span></span><br><span class="line">path.join(<span class="string">'/foot'</span>, __filename); <span class="comment">// __filename是模块内的变量，代表当前js文件</span></span><br><span class="line"><span class="comment">// 返回：/foot/xxx.js    </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下路径拼接的方式不推荐：</span></span><br><span class="line"><span class="keyword">var</span> strPath = <span class="string">'/foot/'</span> + <span class="string">'xxx.js'</span>;  <span class="comment">//虽然跟上面实现的方式一致，但是不推荐。</span></span><br></pre></td></tr></table></figure>
+<h3 id="path-resolve"><a href="#path-resolve" class="headerlink" title="path.resolve()"></a>path.resolve()</h3><p>方法将路径或路径片段的序列解析为绝对路径。<br>给定的路径序列从右到左进行处理，每个后续的 path 前置，直到构造出一个绝对路径。 例如，给定的路径片段序列：/foo、 /bar、 baz，调用 path.resolve(‘/foo’, ‘/bar’, ‘baz’) 将返回 /bar/baz。</p>
+<div class="note primary"><p>如果在处理完所有给定的 path 片段之后还未生成绝对路径，则再加上当前工作目录。</p></div>
+<p>生成的路径已规范化，并且除非将路径解析为根目录，否则将删除尾部斜杠。</p>
+<p>零长度的 path 片段会被忽略。</p>
+<p>如果没有传入 path 片段，则 path.resolve() 将返回当前工作目录的绝对路径。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.resolve(<span class="string">'/foo/bar'</span>, <span class="string">'./baz'</span>);</span><br><span class="line"><span class="comment">// 返回: '/foo/bar/baz'</span></span><br><span class="line"></span><br><span class="line">path.resolve(<span class="string">'/foo/bar'</span>, <span class="string">'/tmp/file/'</span>);</span><br><span class="line"><span class="comment">// 返回: '/tmp/file'</span></span><br><span class="line"></span><br><span class="line">path.resolve(<span class="string">'wwwroot'</span>, <span class="string">'static_files/png/'</span>, <span class="string">'../gif/image.gif'</span>);</span><br><span class="line"><span class="comment">// 如果当前工作目录是 /home/myself/node，</span></span><br><span class="line"><span class="comment">// 则返回 '/home/myself/node/wwwroot/static_files/gif/image.gif'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="path-normalize"><a href="#path-normalize" class="headerlink" title="path.normalize()"></a>path.normalize()</h3><p>方法会规范化给定的 path，并解析 ‘..’ 和 ‘.’ 片段。<br>当发现多个连续的路径分隔符时（如 POSIX 上的 / 与 Windows 上的 \ 或 /），它们会被单个的路径分隔符（POSIX 上是 /，Windows 上是 \）替换。 末尾的多个分隔符会被保留。<br>如果 path 是一个长度为零的字符串，则返回 ‘.’，表示当前工作目录。</p>
+<p>语法： path.normalize(path)</p>
+<p>path <string> 要进行规范的路径字符串<br>返回: <string> 规范后的路径字符串<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">path.normalize(<span class="string">'/foo/bar//baz/asdf/quux/..'</span>);</span><br><span class="line"><span class="comment">// 返回: '/foo/bar/baz/asdf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// windows 上</span></span><br><span class="line">path.normalize(<span class="string">'C:\\temp\\\\foo\\bar\\..\\'</span>);</span><br><span class="line"><span class="comment">// 返回: 'C:\\temp\\foo\\'</span></span><br></pre></td></tr></table></figure></string></string></p>
+<!-- more -->]]></content>
+      <tags>
+        <tag>Node</tag>
+      </tags>
+  </entry>
+</search>

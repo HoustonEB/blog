@@ -242,9 +242,41 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -273,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/09/02/动画回调/">
+    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/09/29/weinre/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ONCE">
@@ -292,7 +324,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/09/02/动画回调/" itemprop="url">动画回调</a></h1>
+                <a class="post-title-link" href="/blog/2019/09/29/weinre/" itemprop="url">weinre</a></h1>
         
 
         <div class="post-meta">
@@ -304,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-02T13:44:56+08:00">
-                2019-09-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T11:29:24+08:00">
+                2019-09-29
               </time>
             
 
@@ -327,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/动画/" itemprop="url" rel="index">
-                    <span itemprop="name">动画</span>
+                  <a href="/blog/categories/移动端调试工具/" itemprop="url" rel="index">
+                    <span itemprop="name">移动端调试工具</span>
                   </a>
                 </span>
 
@@ -348,6 +380,35 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="字数统计">
+                  341 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -365,15 +426,16 @@
 
       
         
-          <h2 id="过渡事件"><a href="#过渡事件" class="headerlink" title="过渡事件"></a>过渡事件</h2><p>css中设置了transition属性,会触发过渡事件.</p>
-<ul>
-<li><code>transitionend</code>过渡结束时触发</li>
+          <h2 id="weinre是什么"><a href="#weinre是什么" class="headerlink" title="weinre是什么"></a>weinre是什么</h2><p>weinre(Web Inspector Remote).是一种远程调试的工具,在电脑上可以调试手机远端的页面,包括样式,查看js变量和页面上的报警信息.<br>可以通过<code>document.body.style.color=&#39;red&#39;</code>实时改变文字颜色.</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ul>
+<li>目标页面（target）：被调试的页面，页面已嵌入weinre的远程js，下文会介绍；</li>
+<li>Debug客户端（client）：本地的Web Inspector调试客户端；</li>
+<li>Debug服务端（agent）：一个HTTP Server，为目标页面与Debug客户端建立通信。</li>
 </ul>
-<div class="note danger"><p>当设置<code>transition: all</code>时会触发多次事件</p></div>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//关于重复调用transition</span></span><br><span class="line"><span class="keyword">var</span> handleTransitionEndEvent = <span class="function"><span class="keyword">function</span>(<span class="params">elem, fn, duration</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> called=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在每次transitionEnd的事件后执行该函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!called) &#123;</span><br><span class="line">    fn();</span><br><span class="line">    called=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">elem.addEventListener(transitionEnd,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">callback();</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过setTimeout来补救windowphone中不触发事件的问题</span></span><br><span class="line"></span><br><span class="line">setTimeout(callback,duration);</span><br><span class="line"></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<img src="/blog/2019/09/29/weinre/1.png">
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2019/09/02/动画回调/#more" rel="contents">
+            <a class="btn" href="/blog/2019/09/29/weinre/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -424,7 +486,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/08/26/npm命令/">
+    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/09/21/gulp配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ONCE">
@@ -443,7 +505,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/08/26/npm命令/" itemprop="url">npm命令</a></h1>
+                <a class="post-title-link" href="/blog/2019/09/21/gulp配置/" itemprop="url">gulp配置</a></h1>
         
 
         <div class="post-meta">
@@ -455,8 +517,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-26T10:32:05+08:00">
-                2019-08-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-21T16:57:17+08:00">
+                2019-09-21
               </time>
             
 
@@ -478,8 +540,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/npm/" itemprop="url" rel="index">
-                    <span itemprop="name">npm</span>
+                  <a href="/blog/categories/gulp/" itemprop="url" rel="index">
+                    <span itemprop="name">gulp</span>
                   </a>
                 </span>
 
@@ -499,6 +561,35 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="字数统计">
+                  380 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -516,10 +607,17 @@
 
       
         
-          
-            <p><strong>查看npm全局安装的包</strong><br><code>npm list -g --depth 0</code></p>
-
-          
+          <h3 id="gulp-api"><a href="#gulp-api" class="headerlink" title="gulp api"></a>gulp api</h3><ol>
+<li>task<br>gulp.task([taskName], taskFunction).<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'build'</span>, [<span class="string">'task1'</span>, <span class="string">'task2'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line"></span><br><span class="line">gulp在<span class="number">4</span>版本后不在支持这种嵌套任务的写法.改用一下写法.</span><br><span class="line">gulp.task(<span class="string">'build, gulp.series('</span>task1<span class="string">', '</span>task2<span class="string">'), function() &#123;console.log('</span><span class="keyword">this</span> is build task<span class="string">')&#125;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">gulp 执行多个任务是存在异步的问题.如果需要上一个任务执行完毕后执行任务二.需要使用cb();</span></span><br><span class="line"><span class="string">eg: gulp.task('</span>task1<span class="string">', function(cb) &#123;</span></span><br><span class="line"><span class="string">  console.log('</span>taks1 content<span class="string">');</span></span><br><span class="line"><span class="string">  cb()</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string">gulp.taks('</span>task2<span class="string">',gulp.series('</span>task1<span class="string">', function() &#123;</span></span><br><span class="line"><span class="string">  console.log('</span>task2<span class="string">');</span></span><br><span class="line"><span class="string">&#125;)&#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">result: task1 content  task2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/09/21/gulp配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -566,7 +664,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/08/22/Git/">
+    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/09/17/git reset和git revert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ONCE">
@@ -585,7 +683,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/08/22/Git/" itemprop="url">Git</a></h1>
+                <a class="post-title-link" href="/blog/2019/09/17/git reset和git revert/" itemprop="url">git reset和git revert</a></h1>
         
 
         <div class="post-meta">
@@ -597,8 +695,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T11:38:16+08:00">
-                2019-08-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-17T20:04:58+08:00">
+                2019-09-17
               </time>
             
 
@@ -641,6 +739,35 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="字数统计">
+                  60 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -658,23 +785,20 @@
 
       
         
-          <h2 id="常用git命令"><a href="#常用git命令" class="headerlink" title="常用git命令"></a>常用git命令</h2><ol>
-<li>清除git缓存,添加新的文件进入暂存区<br><code>git rm -r --cached .</code><br><code>git add .</code><div class="note info"><p>应用场景:</p>
-<pre><code>- 先暂存文件,没有git ignore文件
-- 将项目里的第三方git仓库化为己有
-</code></pre></div></li>
-<li>拉取remote分支,并在本地创建分支<br><code>git checkout -b local-branch origin/remote-branch</code></li>
-<li>tag<br><strong>查看本地全部tag</strong><br><code>git tag</code><br><strong>给某个commit添加tag</strong><br><code>git tag tagName commitHash</code><br><strong>推动本地tag到远端</strong><br><code>git push --tags origin</code><br><strong>删除tag</strong><br><code>git tag -d tagName</code><br><strong>查看tag是在哪个commit打的</strong><br><code>git show tagName</code>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/blog/2019/08/22/Git/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <ol>
+<li><p>get reset<br>回退到指定版本,提交历史中看不到指定版本后的提交历史.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git revert<br>反转指定版本的修改,回生成新的revert的commit历史信息.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert 版本号</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
         
       
-    </li></ol></div>
+    </div>
     
     
     
@@ -718,7 +842,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/08/21/npm发包/">
+    <link itemprop="mainEntityOfPage" href="https://houstoneb.github.io/blog/blog/2019/09/17/git fetch和git pull/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ONCE">
@@ -737,7 +861,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/08/21/npm发包/" itemprop="url">npm发包</a></h1>
+                <a class="post-title-link" href="/blog/2019/09/17/git fetch和git pull/" itemprop="url">git fetch 和 git pull</a></h1>
         
 
         <div class="post-meta">
@@ -749,8 +873,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T14:00:36+08:00">
-                2019-08-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-17T19:26:37+08:00">
+                2019-09-17
               </time>
             
 
@@ -772,8 +896,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/npm/" itemprop="url" rel="index">
-                    <span itemprop="name">npm</span>
+                  <a href="/blog/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
                   </a>
                 </span>
 
@@ -793,6 +917,35 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="字数统计">
+                  143 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -810,20 +963,17 @@
 
       
         
-          <h2 id="添加Change-Log"><a href="#添加Change-Log" class="headerlink" title="添加Change Log"></a>添加Change Log</h2><ol>
-<li><strong>安装commitizen</strong><br><code>npm install commitizen -g</code><br>在你的项目里执行一下命令,进行初始化<br><code>commitizen init cz-conventional-changelog --save-dev --save-exact</code><br><span class="label info">commitizen</span>包的作用提供<code>git cz</code>命令代替<code>git commit -m</code></li>
-</ol>
-<img src="/blog/2019/08/21/npm发包/add-commit.png">
+          <h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p><code>git fetch</code>和<code>git pull</code>都是同步远端的代码,区别是前者将远端的更新全部更新到本地git远端文件夹(remotes)内,不会自动merge.<br><img src="/blog/2019/09/17/git%20fetch和git%20pull/1.png"><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2019/08/21/npm发包/#more" rel="contents">
+            <a class="btn" href="/blog/2019/09/17/git fetch和git pull/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -858,7 +1008,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -902,7 +1052,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/blog/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -913,7 +1063,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/blog/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -924,7 +1074,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/blog/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -990,7 +1140,7 @@
         <div class="copyright">
   
   &copy;  2018 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1120,6 +1270,323 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
